@@ -1,0 +1,55 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtDlgs,
+  System.ImageList, Vcl.ImgList;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    fname_1: TLabel;
+    floc_1: TLabel;
+    fname_2: TLabel;
+    Button3: TButton;
+    fname_3: TLabel;
+    Button4: TButton;
+    object_name: TLabel;
+    floc_2: TLabel;
+    floc_3: TLabel;
+    Open_photo: TOpenPictureDialog;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  if Open_photo.Execute() then floc_1.Caption := Open_photo.FileName;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  if Open_photo.Execute() then floc_2.Caption := Open_photo.FileName;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  if Open_photo.Execute() then floc_3.Caption := Open_photo.FileName;
+end;
+
+end.
