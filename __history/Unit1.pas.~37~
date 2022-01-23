@@ -29,6 +29,7 @@ type
     procedure OpenFile2Click(Sender: TObject);
     procedure OpenFile3Click(Sender: TObject);
     procedure OpenDirClick(Sender: TObject);
+    procedure MakeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,11 +43,22 @@ implementation
 
 {$R *.dfm}
 
+procedure TForm1.MakeClick(Sender: TObject);
+var
+  cash1_path, cash2_path, cash3_path, dest_folder: string;
+begin
+  dest_folder := destlock.Caption; // Получаем путь к целевой папке
+  cash1_path := floc_1.Caption; // Получаем путь к фото кассы 1 из лейбла
+  cash2_path := floc_2.Caption; // Получаем путь к фото кассы 2 из лейбла
+  cash3_path := floc_3.Caption; // Получаем путь к фото кассы 3 из лейбла
+  ShowMessage(ExtractFileName(cash1_path));
+end;
+
 procedure TForm1.OpenDirClick(Sender: TObject);
 var
   dir: String;
 begin
-  if SelectDirectory('Выберите папку, которая будет удалена:', '', dir) then
+  if SelectDirectory('Выберите папку, для сохранения обработанных фото:', '', dir) then
     destlock.Caption := dir;
 end;
 

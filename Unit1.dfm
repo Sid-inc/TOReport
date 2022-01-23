@@ -155,6 +155,7 @@ object Form1: TForm1
     Height = 57
     Caption = #1057#1092#1086#1088#1084#1080#1088#1086#1074#1072#1090#1100
     TabOrder = 2
+    OnClick = MakeClick
   end
   object OpenFile2: TButton
     Left = 648
