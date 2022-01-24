@@ -1,9 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.583,G:\Develop\Delphi\TOReport\Project1.dproj=C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.583,C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Project1.dproj=G:\Develop\Delphi\TOReport\Project1.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.057,=C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.116,G:\Develop\Delphi\TOReport\Unit1.dfm=C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.116,G:\Develop\Delphi\TOReport\Unit1.pas=C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-  </Transactions>
+    <Transaction>1899.12.30 00:00:00.000.116,C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Unit1.pas=G:\Develop\Delphi\TOReport\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.116,C:\Users\Professional\Documents\Embarcadero\Studio\Projects\Unit1.dfm=G:\Develop\Delphi\TOReport\Unit1.dfm</Transaction>
+    <Transaction>2022.01.24 17:57:26.475,=C:\project\TOReport\Unit2.pas</Transaction>
+    <Transaction>2022.01.24 17:59:46.582,=C:\project\TOReport\Unit2.pas</Transaction>
+    <Transaction>2022.01.24 18:00:06.631,=C:\project\TOReport\Unit3.pas</Transaction>
+    <Transaction>2022.01.24 18:00:53.163,C:\project\TOReport\Unit2.dfm=C:\project\TOReport\Unit3.dfm</Transaction>
+    <Transaction>2022.01.24 18:00:53.163,C:\project\TOReport\Unit2.pas=C:\project\TOReport\Unit3.pas</Transaction>
+    <Transaction>2022.01.24 18:01:25.266,C:\project\TOReport\obj_MM_form.dfm=C:\project\TOReport\Unit1.dfm</Transaction>
+    <Transaction>2022.01.24 18:01:25.266,C:\project\TOReport\obj_MM_form.pas=C:\project\TOReport\Unit1.pas</Transaction>
+    <Transaction>2022.01.24 18:01:44.922,C:\project\TOReport\obj_MK_form.dfm=C:\project\TOReport\Unit2.dfm</Transaction>
+    <Transaction>2022.01.24 18:01:44.922,C:\project\TOReport\obj_MK_form.pas=C:\project\TOReport\Unit2.pas</Transaction>
+    <Transaction>2022.01.24 18:03:36.057,=C:\project\TOReport\Unit1.pas</Transaction>
+    <Transaction>2022.01.24 18:03:57.298,C:\project\TOReport\obj_select_form.dfm=C:\project\TOReport\Unit1.dfm</Transaction>
+    <Transaction>2022.01.24 18:03:57.298,C:\project\TOReport\obj_select_form.pas=C:\project\TOReport\Unit1.pas</Transaction>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="obj_MM_form.pas"/>
+    <File Path="obj_MM_form.dfm"/>
+    <File Path="obj_MK_form.pas"/>
+    <File Path="obj_MK_form.dfm"/>
+    <File Path="obj_select_form.pas"/>
+    <File Path="obj_select_form.dfm"/>
+  </ProjectSortOrder>
 </BorlandProject>
