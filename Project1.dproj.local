@@ -18,11 +18,11 @@
     <Transaction>2022.01.24 18:03:57.298,C:\project\TOReport\obj_select_form.dfm=C:\project\TOReport\Unit1.dfm</Transaction>
     <Transaction>2022.01.24 18:03:57.298,C:\project\TOReport\obj_select_form.pas=C:\project\TOReport\Unit1.pas</Transaction>
   </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="obj_select_form.pas"/>
+    <File Path="obj_select_form.dfm"/>
     <File Path="obj_MM_form.pas"/>
     <File Path="obj_MM_form.dfm"/>
     <File Path="obj_MK_form.pas"/>
     <File Path="obj_MK_form.dfm"/>
-    <File Path="obj_select_form.pas"/>
-    <File Path="obj_select_form.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

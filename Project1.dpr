@@ -11,8 +11,8 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tobj_sel_form, obj_sel_form);
   Application.CreateForm(TObj_MM, Obj_MM);
   Application.CreateForm(TObj_MK, Obj_MK);
-  Application.CreateForm(Tobj_sel_form, obj_sel_form);
   Application.Run;
 end.
