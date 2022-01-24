@@ -1,7 +1,7 @@
 object obj_sel_form: Tobj_sel_form
   Left = 0
   Top = 0
-  Caption = 'obj_sel_form'
+  Caption = 'TO Photo renamer'
   ClientHeight = 334
   ClientWidth = 537
   Color = clBtnFace
@@ -72,6 +72,7 @@ object obj_sel_form: Tobj_sel_form
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
+    OnClick = MMClick
   end
   object MK: TRadioButton
     Left = 264
@@ -86,6 +87,7 @@ object obj_sel_form: Tobj_sel_form
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
+    OnClick = MKClick
   end
   object MA: TRadioButton
     Left = 264
@@ -100,6 +102,7 @@ object obj_sel_form: Tobj_sel_form
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 3
+    OnClick = MAClick
   end
   object next_button: TButton
     Left = 406
@@ -114,5 +117,6 @@ object obj_sel_form: Tobj_sel_form
     Font.Style = []
     ParentFont = False
     TabOrder = 4
+    OnClick = next_buttonClick
   end
 end

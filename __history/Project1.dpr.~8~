@@ -1,0 +1,18 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  obj_MM_form in 'obj_MM_form.pas' {Obj_MM},
+  obj_MK_form in 'obj_MK_form.pas' {Obj_MK},
+  obj_select_form in 'obj_select_form.pas' {obj_sel_form},
+  Unit1 in 'Unit1.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(Tobj_sel_form, obj_sel_form);
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

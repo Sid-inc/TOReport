@@ -11,6 +11,7 @@ object Obj_MM: TObj_MM
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object fname_1: TLabel

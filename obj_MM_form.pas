@@ -30,6 +30,7 @@ type
     procedure OpenFile3Click(Sender: TObject);
     procedure OpenDirClick(Sender: TObject);
     procedure MakeClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -37,11 +38,16 @@ type
   end;
 
 var
-  Obj_MM: TObj_MM;
+  obj_MM: Tobj_MM;
 
 implementation
 
 {$R *.dfm}
+
+procedure TObj_MM.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+close;
+end;
 
 procedure TObj_MM.MakeClick(Sender: TObject);
 var
