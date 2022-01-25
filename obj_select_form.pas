@@ -20,19 +20,53 @@ type
     procedure MMClick(Sender: TObject);
     procedure MKClick(Sender: TObject);
     procedure MAClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
+type
+    TReport = class // Создаем класс TReport для хранения общей информации о отчете
+    public
+      Rtype: string; // Свойство класса для хранения типа (ММ, МК, МА)
+      OOname: string; // Название OO
+      Cashcount: integer; // Свойство класса для хранения количества касс
+    end;
+
 var
   obj_sel_form: Tobj_sel_form;
   obj_type: Integer;
+  Report: TReport;
+
+  cash,
+  Inside,
+  kkt,
+  ibpmark,
+  sksmount,
+  allviewbuyer,
+  allviewitems,
+  allview,
+  check: string; // Создаем строковые переменные чтобы хронить русский текст для названий файлов
 
 implementation
-
 {$R *.dfm}
+
+procedure Tobj_sel_form.FormCreate(Sender: TObject); // При создании формы записываем русский текст в перменные
+begin
+  cash := 'Касса';
+  Inside := 'Внутри';
+  kkt := 'ККТ';
+  ibpmark := 'Маркировка БП';
+  sksmount := 'Монтаж СКС';
+  allviewbuyer := 'Общий вид (покупатель)';
+  allviewitems := 'Общий вид Оборудование';
+  allview := 'Общий вид';
+  check := 'Чек';
+
+  Report:= TReport.Create; // Создание глобального объекта Report класса TReport для доступа к тему из любой части программы
+end;
 
 procedure Tobj_sel_form.MAClick(Sender: TObject);
 begin
@@ -55,10 +89,17 @@ begin
     1: begin
       obj_MM.Show;
       obj_sel_form.Hide;
+      Report.Rtype := 'ММ'; // Записываем тип отчета в глобальный объект
     end;
     2: ShowMessage('Переход на форму МK');
     3: ShowMessage('Переход на форму МA');
   end;
+
+  if obj_name.Text <> '' then Report.OOname := obj_name.Text // Если в поле названия магазина что-то есть, записываем это название в глобальный объект
+    else
+      Report.OOname := 'Экспериментальный'; // Если в поле пусто, записываем в глобальный объект заглушку
+
+  obj_MM.object_name.Caption := obj_select_form.Report.Rtype + ' ' + obj_select_form.Report.OOname; // Выводим в названии второй формы название и тип ОО
 end;
 
 end.

@@ -24,7 +24,6 @@ type
     destdesc: TLabel;
     destlock: TLabel;
     OpenDir: TButton;
-    OpenDialog1: TOpenDialog;
     procedure OpenFile1Click(Sender: TObject);
     procedure OpenFile2Click(Sender: TObject);
     procedure OpenFile3Click(Sender: TObject);
@@ -42,11 +41,13 @@ var
 
 implementation
 
+  uses obj_select_form;
+
 {$R *.dfm}
 
 procedure TObj_MM.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-close;
+  obj_sel_form.Close;
 end;
 
 procedure TObj_MM.MakeClick(Sender: TObject);
@@ -59,6 +60,8 @@ begin
   cash3_path := floc_3.Caption; // Получаем путь к фото кассы 3 из лейбла
   if RenameFile(cash1_path, dest_folder + '\' + 'Касса 1 Общий вид' + '.jpg') then
     ShowMessage('Файл кассы 1 переименован'); // Переименование 1го файла первой кассы
+
+
 end;
 
 procedure TObj_MM.OpenDirClick(Sender: TObject);

@@ -180,7 +180,4 @@ object Obj_MM: TObj_MM
     Filter = 'All|*.png; *.jpg; *.jpeg; *.bmp'
     Left = 776
   end
-  object OpenDialog1: TOpenDialog
-    Left = 712
-  end
 end

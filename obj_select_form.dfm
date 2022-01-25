@@ -11,6 +11,7 @@ object obj_sel_form: Tobj_sel_form
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Start_message: TLabel
