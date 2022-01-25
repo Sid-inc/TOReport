@@ -188,7 +188,7 @@ object Obj_MM: TObj_MM
     Top = 110
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1074#1085#1091#1090#1088#1080
+    Caption = #1050#1072#1089#1089#1072' 1 '#1042#1085#1091#1090#1088#1080
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
@@ -402,7 +402,7 @@ object Obj_MM: TObj_MM
     Top = 182
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1074#1085#1091#1090#1088#1080
+    Caption = #1050#1072#1089#1089#1072' 1 '#1052#1072#1088#1082#1080#1088#1086#1074#1082#1072' '#1041#1055
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
@@ -509,7 +509,7 @@ object Obj_MM: TObj_MM
     Top = 218
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1054#1073#1097#1080#1081' '#1074#1080#1076' '#1086#1073#1086#1088#1091#1076#1086#1074#1072#1085#1080#1077
+    Caption = #1050#1072#1089#1089#1072' 1 '#1052#1086#1085#1090#1072#1078' '#1057#1050#1057
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
@@ -616,7 +616,7 @@ object Obj_MM: TObj_MM
     Top = 254
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1074#1085#1091#1090#1088#1080
+    Caption = #1050#1072#1089#1089#1072' 1 '#1050#1050#1058
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
@@ -723,7 +723,7 @@ object Obj_MM: TObj_MM
     Top = 290
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1054#1073#1097#1080#1081' '#1074#1080#1076' '#1086#1073#1086#1088#1091#1076#1086#1074#1072#1085#1080#1077
+    Caption = #1050#1072#1089#1089#1072' 1 '#1063#1077#1082
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
@@ -830,7 +830,7 @@ object Obj_MM: TObj_MM
     Top = 326
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1074#1085#1091#1090#1088#1080
+    Caption = #1050#1072#1089#1089#1072' 1 '#1054#1073#1097#1080#1081' '#1074#1080#1076
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
@@ -937,7 +937,7 @@ object Obj_MM: TObj_MM
     Top = 362
     Width = 280
     Height = 30
-    Caption = #1050#1072#1089#1089#1072' 1 '#1054#1073#1097#1080#1081' '#1074#1080#1076' '#1086#1073#1086#1088#1091#1076#1086#1074#1072#1085#1080#1077
+    Caption = #1050#1072#1089#1089#1072' 1 '#1054#1073#1097#1080#1081' '#1074#1080#1076' ('#1055#1086#1082#1091#1087#1072#1090#1077#1083#1100')'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = 0
