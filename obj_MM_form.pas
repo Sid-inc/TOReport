@@ -5,31 +5,44 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtDlgs,
-  System.ImageList, Vcl.ImgList, Vcl.Menus, FileCtrl;
+  System.ImageList, Vcl.ImgList, Vcl.Menus, FileCtrl, Vcl.Buttons;
 
 type
   TObj_MM = class(TForm)
     object_name: TLabel;
-    OpenFile1: TButton;
-    OpenFile3: TButton;
-    fname_1: TLabel;
-    fname_2: TLabel;
-    fname_3: TLabel;
     floc_1: TLabel;
     floc_3: TLabel;
     Make: TButton;
     Open_photo: TOpenPictureDialog;
     floc_2: TLabel;
-    OpenFile2: TButton;
     destdesc: TLabel;
     destlock: TLabel;
     OpenDir: TButton;
+    floc_4: TLabel;
+    floc_6: TLabel;
+    floc_5: TLabel;
+    floc_7: TLabel;
+    floc_8: TLabel;
+    OpenFile1: TBitBtn;
+    OpenFile2: TBitBtn;
+    OpenFile4: TBitBtn;
+    OpenFile3: TBitBtn;
+    OpenFile6: TBitBtn;
+    OpenFile5: TBitBtn;
+    OpenFile8: TBitBtn;
+    OpenFile7: TBitBtn;
     procedure OpenFile1Click(Sender: TObject);
     procedure OpenFile2Click(Sender: TObject);
     procedure OpenFile3Click(Sender: TObject);
     procedure OpenDirClick(Sender: TObject);
     procedure MakeClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure OpenFile4Click(Sender: TObject);
+    procedure OpenFile5Click(Sender: TObject);
+    procedure OpenFile6Click(Sender: TObject);
+    procedure OpenFile7Click(Sender: TObject);
+    procedure OpenFile8Click(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -49,6 +62,7 @@ procedure TObj_MM.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   obj_sel_form.Close;
 end;
+
 
 procedure TObj_MM.MakeClick(Sender: TObject);
 var
@@ -86,6 +100,31 @@ end;
 procedure TObj_MM.OpenFile3Click(Sender: TObject);
 begin
   if Open_photo.Execute then floc_3.Caption := Open_photo.FileName;
+end;
+
+procedure TObj_MM.OpenFile4Click(Sender: TObject);
+begin
+  if Open_photo.Execute then floc_4.Caption := Open_photo.FileName;
+end;
+
+procedure TObj_MM.OpenFile5Click(Sender: TObject);
+begin
+if Open_photo.Execute then floc_5.Caption := Open_photo.FileName;
+end;
+
+procedure TObj_MM.OpenFile6Click(Sender: TObject);
+begin
+  if Open_photo.Execute then floc_6.Caption := Open_photo.FileName;
+end;
+
+procedure TObj_MM.OpenFile7Click(Sender: TObject);
+begin
+  if Open_photo.Execute then floc_7.Caption := Open_photo.FileName;
+end;
+
+procedure TObj_MM.OpenFile8Click(Sender: TObject);
+begin
+  if Open_photo.Execute then floc_8.Caption := Open_photo.FileName;
 end;
 
 end.

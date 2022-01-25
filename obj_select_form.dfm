@@ -1,9 +1,11 @@
 object obj_sel_form: Tobj_sel_form
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'TO Photo renamer'
-  ClientHeight = 334
-  ClientWidth = 537
+  ClientHeight = 344
+  ClientWidth = 547
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +14,7 @@ object obj_sel_form: Tobj_sel_form
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Start_message: TLabel

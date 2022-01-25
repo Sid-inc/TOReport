@@ -3,11 +3,12 @@ unit obj_select_form;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, obj_MM_form;
 
 type
-    Tobj_sel_form = class(TForm)
+  Tobj_sel_form = class(TForm)
     Start_message: TLabel;
     Label_name: TLabel;
     obj_name: TEdit;
@@ -21,6 +22,7 @@ type
     procedure MKClick(Sender: TObject);
     procedure MAClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,32 +30,29 @@ type
   end;
 
 type
-    TReport = class // Создаем класс TReport для хранения общей информации о отчете
-    public
-      Rtype: string; // Свойство класса для хранения типа (ММ, МК, МА)
-      OOname: string; // Название OO
-      Cashcount: integer; // Свойство класса для хранения количества касс
-    end;
+  TReport = class
+    // Создаем класс TReport для хранения общей информации о отчете
+  public
+    Rtype: string; // Свойство класса для хранения типа (ММ, МК, МА)
+    OOname: string; // Название OO
+    Cashcount: integer; // Свойство класса для хранения количества касс
+  end;
 
 var
   obj_sel_form: Tobj_sel_form;
-  obj_type: Integer;
+  obj_type: integer;
   Report: TReport;
 
-  cash,
-  Inside,
-  kkt,
-  ibpmark,
-  sksmount,
-  allviewbuyer,
-  allviewitems,
-  allview,
-  check: string; // Создаем строковые переменные чтобы хронить русский текст для названий файлов
+  cash, Inside, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
+    check: string;
+  // Создаем строковые переменные чтобы хронить русский текст для названий файлов
 
 implementation
+
 {$R *.dfm}
 
-procedure Tobj_sel_form.FormCreate(Sender: TObject); // При создании формы записываем русский текст в перменные
+procedure Tobj_sel_form.FormCreate(Sender: TObject);
+// При создании формы записываем русский текст в перменные
 begin
   cash := 'Касса';
   Inside := 'Внутри';
@@ -65,41 +64,75 @@ begin
   allview := 'Общий вид';
   check := 'Чек';
 
-  Report:= TReport.Create; // Создание глобального объекта Report класса TReport для доступа к тему из любой части программы
+  Report := TReport.Create;
+  // Создание глобального объекта Report класса TReport для доступа к тему из любой части программы
+end;
+
+procedure Tobj_sel_form.FormShow(Sender: TObject);
+begin
+  obj_type := 0;
 end;
 
 procedure Tobj_sel_form.MAClick(Sender: TObject);
 begin
-  obj_type:= 3;
+  obj_type := 3;
 end;
 
 procedure Tobj_sel_form.MKClick(Sender: TObject);
 begin
-  obj_type:= 2;
+  obj_type := 2;
 end;
 
 procedure Tobj_sel_form.MMClick(Sender: TObject);
 begin
-  obj_type:= 1;
+  obj_type := 1;
 end;
 
 procedure Tobj_sel_form.next_buttonClick(Sender: TObject);
 begin
+  if obj_name.Text <> '' then
+     Report.OOname := obj_name.Text
+    // Если в поле названия магазина что-то есть, записываем это название в глобальный объект
+    else
+      begin
+      ShowMessage('Введите название объекта!');
+      // Если в поле пусто, выдаем предупреждение
+      Exit;
+      // Прерываем дальнейшее выполнение
+      end;
+  if obj_type = 0 then
+     begin
+       ShowMessage('Не выбран формат ОО!');
+       Exit;
+     end;
+
   case obj_type of
-    1: begin
-      obj_MM.Show;
-      obj_sel_form.Hide;
-      Report.Rtype := 'ММ'; // Записываем тип отчета в глобальный объект
-    end;
-    2: ShowMessage('Переход на форму МK');
-    3: ShowMessage('Переход на форму МA');
+    1:
+      begin
+        obj_MM.Show;
+        obj_sel_form.Hide;
+        Report.Rtype := 'ММ'; // Записываем тип отчета в глобальный объект
+      end;
+    2:
+      begin
+        ShowMessage('Форма для МК в разработке..');
+        //obj_MM.Show;
+        //obj_sel_form.Hide;
+        //Report.Rtype := 'МК'; // Записываем тип отчета в глобальный объект
+      end;
+    3:
+      begin
+        ShowMessage('Форма для МА в разработке..');
+        //obj_MM.Show;
+        //obj_sel_form.Hide;
+        //Report.Rtype := 'МА'; // Записываем тип отчета в глобальный объект
+      end;
+    
   end;
 
-  if obj_name.Text <> '' then Report.OOname := obj_name.Text // Если в поле названия магазина что-то есть, записываем это название в глобальный объект
-    else
-      Report.OOname := 'Экспериментальный'; // Если в поле пусто, записываем в глобальный объект заглушку
-
-  obj_MM.object_name.Caption := obj_select_form.Report.Rtype + ' ' + obj_select_form.Report.OOname; // Выводим в названии второй формы название и тип ОО
+  obj_MM.object_name.Caption := obj_select_form.Report.Rtype + ' ' +
+    obj_select_form.Report.OOname;
+  // Выводим в названии второй формы название и тип ОО
 end;
 
 end.
