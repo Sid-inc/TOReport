@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtDlgs,
-  System.ImageList, Vcl.ImgList, Vcl.Menus, FileCtrl, Vcl.Buttons;
+  System.ImageList, Vcl.ImgList, Vcl.Menus, FileCtrl, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TObj_MM = class(TForm)
@@ -15,9 +15,6 @@ type
     Make: TButton;
     Open_photo: TOpenPictureDialog;
     floc_2: TLabel;
-    destdesc: TLabel;
-    destlock: TLabel;
-    OpenDir: TButton;
     floc_4: TLabel;
     floc_6: TLabel;
     floc_5: TLabel;
@@ -31,17 +28,18 @@ type
     OpenFile5: TBitBtn;
     OpenFile8: TBitBtn;
     OpenFile7: TBitBtn;
+    BtnBlock: TPanel;
+    destlock: TLabel;
     procedure OpenFile1Click(Sender: TObject);
     procedure OpenFile2Click(Sender: TObject);
     procedure OpenFile3Click(Sender: TObject);
-    procedure OpenDirClick(Sender: TObject);
-    procedure MakeClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure OpenFile4Click(Sender: TObject);
     procedure OpenFile5Click(Sender: TObject);
     procedure OpenFile6Click(Sender: TObject);
     procedure OpenFile7Click(Sender: TObject);
     procedure OpenFile8Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -51,6 +49,10 @@ type
 
 var
   obj_MM: Tobj_MM;
+  Cash_Panel: TPanel;
+  OpenFileBtn: TBitBtn;
+  n: integer;           //временно номер кассы для названия кнопок
+  i: integer;
 
 implementation
 
@@ -64,27 +66,131 @@ begin
 end;
 
 
-procedure TObj_MM.MakeClick(Sender: TObject);
-var
-  cash1_path, cash2_path, cash3_path, dest_folder: string;
+//procedure TObj_MM.MakeClick(Sender: TObject);
+//var
+//  cash1_path, cash2_path, cash3_path, dest_folder: string;
+//begin
+//  dest_folder := destlock.Caption; // Получаем путь к целевой папке
+//  cash1_path := floc_1.Caption; // Получаем путь к фото кассы 1 из лейбла
+//  cash2_path := floc_2.Caption; // Получаем путь к фото кассы 2 из лейбла
+//  cash3_path := floc_3.Caption; // Получаем путь к фото кассы 3 из лейбла
+//  if RenameFile(cash1_path, dest_folder + '\' + 'Касса 1 Общий вид' + '.jpg') then
+//    ShowMessage('Файл кассы 1 переименован'); // Переименование 1го файла первой кассы
+
+ //end;
+
+procedure TObj_MM.FormShow(Sender: TObject);
 begin
-  dest_folder := destlock.Caption; // Получаем путь к целевой папке
-  cash1_path := floc_1.Caption; // Получаем путь к фото кассы 1 из лейбла
-  cash2_path := floc_2.Caption; // Получаем путь к фото кассы 2 из лейбла
-  cash3_path := floc_3.Caption; // Получаем путь к фото кассы 3 из лейбла
-  if RenameFile(cash1_path, dest_folder + '\' + 'Касса 1 Общий вид' + '.jpg') then
-    ShowMessage('Файл кассы 1 переименован'); // Переименование 1го файла первой кассы
-
-
+for n := 1 to 4 do
+begin
+Cash_Panel:= TPanel.Create(obj_MM);
+Cash_Panel.Parent := obj_MM;
+Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
+Cash_Panel.Caption := '';
+Cash_Panel.Top := 56 + 300*(n-1);
+Cash_Panel.Left := 0;
+Cash_Panel.Height := 300;
+Cash_Panel.Width := 810;
+//Панелька с кнопками
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile1';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + inside;
+OpenFileBtn.Top := 10;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
+//Кнопка 1
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile2';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewitems;
+OpenFileBtn.Top := 45;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 2
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile3';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + ibpmark;
+OpenFileBtn.Top := 80;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 3
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile4';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + sksmount;
+OpenFileBtn.Top := 115;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 4
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile5';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + kkt;
+OpenFileBtn.Top := 150;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 5
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile6';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + check;
+OpenFileBtn.Top := 185;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 6
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile7';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allview;
+OpenFileBtn.Top := 220;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 7
+OpenFileBtn:= TBitBtn.Create(obj_MM);
+OpenFileBtn.Parent := Cash_Panel;
+OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile8';
+OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewbuyer;
+OpenFileBtn.Top := 255;
+OpenFileBtn.Left := 15;
+OpenFileBtn.Height := 30;
+OpenFileBtn.Width := 280;
+OpenFileBtn.Margin := 0;
+OpenFileBtn.Font.Height := 0;
+OpenFileBtn.Font.Name := 'Times New Roman';
+//Кнопка 8
 end;
-
-procedure TObj_MM.OpenDirClick(Sender: TObject);
-var
-  dir: String;
-begin
-  if SelectDirectory('Выберите папку, для сохранения обработанных фото:', '', dir) then
-    destlock.Caption := dir;
-    end;
+end;
 
 procedure TObj_MM.OpenFile1Click(Sender: TObject);
 begin

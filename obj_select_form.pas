@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, obj_MM_form;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, obj_MM_form,
+  Vcl.Buttons, FileCtrl, Vcl.ExtCtrls;
 
 type
   Tobj_sel_form = class(TForm)
@@ -17,12 +18,29 @@ type
     MA: TRadioButton;
     Label_format: TLabel;
     next_button: TButton;
+    destdesc: TLabel;
+    destlock: TLabel;
+    OpenDirBtn: TButton;
+    Label_cashcount: TLabel;
+    cash_count2: TRadioButton;
+    cash_count3: TRadioButton;
+    cash_count4: TRadioButton;
+    cash_count5: TRadioButton;
+    obj_type_gr: TPanel;
+    cash_count_gr: TPanel;
     procedure next_buttonClick(Sender: TObject);
     procedure MMClick(Sender: TObject);
     procedure MKClick(Sender: TObject);
     procedure MAClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure OpenDirBtnClick(Sender: TObject);
+    procedure cash_count2Click(Sender: TObject);
+    procedure cash_count3Click(Sender: TObject);
+    procedure cash_count4Click(Sender: TObject);
+    procedure cash_count5Click(Sender: TObject);
+
+
   private
     { Private declarations }
   public
@@ -33,6 +51,7 @@ type
   TReport = class
     // Создаем класс TReport для хранения общей информации о отчете
   public
+    Dlock: String; //Директория сохранения фото
     Rtype: string; // Свойство класса для хранения типа (ММ, МК, МА)
     OOname: string; // Название OO
     Cashcount: integer; // Свойство класса для хранения количества касс
@@ -41,6 +60,7 @@ type
 var
   obj_sel_form: Tobj_sel_form;
   obj_type: integer;
+  cashnum: integer;
   Report: TReport;
 
   cash, Inside, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
@@ -51,11 +71,31 @@ implementation
 
 {$R *.dfm}
 
+procedure Tobj_sel_form.cash_count2Click(Sender: TObject);
+begin
+cashnum := 2;
+end;
+
+procedure Tobj_sel_form.cash_count3Click(Sender: TObject);
+begin
+cashnum := 3;
+end;
+
+procedure Tobj_sel_form.cash_count4Click(Sender: TObject);
+begin
+cashnum := 4;
+end;
+
+procedure Tobj_sel_form.cash_count5Click(Sender: TObject);
+begin
+cashnum := 5;
+end;
+
 procedure Tobj_sel_form.FormCreate(Sender: TObject);
 // При создании формы записываем русский текст в перменные
 begin
   cash := 'Касса';
-  Inside := 'Внутри';
+  inside := 'Внутри';
   kkt := 'ККТ';
   ibpmark := 'Маркировка БП';
   sksmount := 'Монтаж СКС';
@@ -71,6 +111,7 @@ end;
 procedure Tobj_sel_form.FormShow(Sender: TObject);
 begin
   obj_type := 0;
+  cashnum := 1;  //По умолчанию 1 касса
 end;
 
 procedure Tobj_sel_form.MAClick(Sender: TObject);
@@ -105,6 +146,20 @@ begin
        ShowMessage('Не выбран формат ОО!');
        Exit;
      end;
+  if destlock.Caption = '..' then
+      begin
+      ShowMessage('Не выбрана папка сохранения фото!');
+      Exit;
+      end;
+  if cashnum > 1 then
+    Report.Cashcount := cashnum
+    //Если выбран чекбокс с количеством касс продолжаем
+    else
+    begin
+    ShowMessage('Выберете количество касс!');
+    Exit;
+    end;
+
 
   case obj_type of
     1:
@@ -135,4 +190,14 @@ begin
   // Выводим в названии второй формы название и тип ОО
 end;
 
+procedure Tobj_sel_form.OpenDirBtnClick(Sender: TObject);
+var
+  dir: String;
+begin
+  if SelectDirectory ('Выберите папку, для сохранения обработанных фото:', '', dir) then
+    begin
+    destlock.Caption := dir;
+    Report.Dlock := dir;  //передаем классу информацию о пути сохранения фото
+    end;
+end;
 end.
