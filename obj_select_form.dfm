@@ -31,8 +31,6 @@ object obj_sel_form: Tobj_sel_form
     Font.Name = 'Times New Roman'
     Font.Style = []
     ParentFont = False
-    ExplicitLeft = 134
-    ExplicitTop = 8
     ExplicitWidth = 269
   end
   object Label_name: TLabel
@@ -77,7 +75,7 @@ object obj_sel_form: Tobj_sel_form
   object destlock: TLabel
     Left = 48
     Top = 81
-    Width = 89
+    Width = 8
     Height = 16
     Caption = '..'
     Font.Charset = DEFAULT_CHARSET

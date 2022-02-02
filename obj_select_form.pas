@@ -117,11 +117,13 @@ end;
 procedure Tobj_sel_form.MAClick(Sender: TObject);
 begin
   obj_type := 3;
+  cash_count2.Checked := True;
 end;
 
 procedure Tobj_sel_form.MKClick(Sender: TObject);
 begin
   obj_type := 2;
+  cash_count2.Checked := True;
 end;
 
 procedure Tobj_sel_form.MMClick(Sender: TObject);
