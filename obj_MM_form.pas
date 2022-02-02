@@ -123,9 +123,9 @@ begin
     OpenFileBtn.Width := 280;
     OpenFileBtn.Margin := 0;
     OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
     OpenFileBtn.Font.Name := 'Times New Roman';
     OpenFileBtn.onClick := OpenFile1Click;
-    //OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
     //Кнопка 1
     OpenFileBtn:= TBitBtn.Create(obj_MM);
     OpenFileBtn.Parent := Cash_Panel;
