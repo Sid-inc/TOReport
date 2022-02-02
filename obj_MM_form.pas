@@ -31,6 +31,7 @@ type
     BtnBlock: TPanel;
     destlock: TLabel;
     Label1: TLabel;
+    ScrollBox1: TScrollBox;
     procedure OpenFile1Click(Sender: TObject);
     procedure OpenFile2Click(Sender: TObject);
     procedure OpenFile3Click(Sender: TObject);
@@ -41,6 +42,10 @@ type
     procedure OpenFile7Click(Sender: TObject);
     procedure OpenFile8Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
 
   private
     { Private declarations }
@@ -79,6 +84,20 @@ end;
 
  //end;
 
+procedure TObj_MM.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  with scrollBox1.VertScrollBar do
+   Position := Position + Increment;
+end;
+
+procedure TObj_MM.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  with scrollBox1.VertScrollBar do
+   Position := Position - Increment;
+end;
+
 procedure TObj_MM.FormShow(Sender: TObject);
 var
   n: integer;           //временно номер кассы для названия кнопок
@@ -86,10 +105,10 @@ begin
   for n := 1 to 4 do
   begin
     Cash_Panel:= TPanel.Create(obj_MM);
-    Cash_Panel.Parent := obj_MM;
+    Cash_Panel.Parent := ScrollBox1;
     Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
     Cash_Panel.Caption := '';
-    Cash_Panel.Top := 56 + 300*(n-1);
+    Cash_Panel.Top := 300*(n-1);
     Cash_Panel.Left := 0;
     Cash_Panel.Height := 300;
     Cash_Panel.Width := 810;
