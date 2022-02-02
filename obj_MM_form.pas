@@ -30,6 +30,7 @@ type
     OpenFile7: TBitBtn;
     BtnBlock: TPanel;
     destlock: TLabel;
+    Label1: TLabel;
     procedure OpenFile1Click(Sender: TObject);
     procedure OpenFile2Click(Sender: TObject);
     procedure OpenFile3Click(Sender: TObject);
@@ -51,7 +52,6 @@ var
   obj_MM: Tobj_MM;
   Cash_Panel: TPanel;
   OpenFileBtn: TBitBtn;
-  n: integer;           //временно номер кассы дл€ названи€ кнопок
   i: integer;
 
 implementation
@@ -80,121 +80,127 @@ end;
  //end;
 
 procedure TObj_MM.FormShow(Sender: TObject);
+var
+  n: integer;           //временно номер кассы дл€ названи€ кнопок
 begin
-for n := 1 to 4 do
-begin
-Cash_Panel:= TPanel.Create(obj_MM);
-Cash_Panel.Parent := obj_MM;
-Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
-Cash_Panel.Caption := '';
-Cash_Panel.Top := 56 + 300*(n-1);
-Cash_Panel.Left := 0;
-Cash_Panel.Height := 300;
-Cash_Panel.Width := 810;
-//ѕанелька с кнопками
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile1';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + inside;
-OpenFileBtn.Top := 10;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-//OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-// нопка 1
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile2';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewitems;
-OpenFileBtn.Top := 45;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 2
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile3';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + ibpmark;
-OpenFileBtn.Top := 80;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 3
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile4';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + sksmount;
-OpenFileBtn.Top := 115;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 4
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile5';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + kkt;
-OpenFileBtn.Top := 150;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 5
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile6';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + check;
-OpenFileBtn.Top := 185;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 6
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile7';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allview;
-OpenFileBtn.Top := 220;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 7
-OpenFileBtn:= TBitBtn.Create(obj_MM);
-OpenFileBtn.Parent := Cash_Panel;
-OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile8';
-OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewbuyer;
-OpenFileBtn.Top := 255;
-OpenFileBtn.Left := 15;
-OpenFileBtn.Height := 30;
-OpenFileBtn.Width := 280;
-OpenFileBtn.Margin := 0;
-OpenFileBtn.Font.Height := 0;
-OpenFileBtn.Font.Name := 'Times New Roman';
-// нопка 8
-end;
+  for n := 1 to 4 do
+  begin
+    Cash_Panel:= TPanel.Create(obj_MM);
+    Cash_Panel.Parent := obj_MM;
+    Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
+    Cash_Panel.Caption := '';
+    Cash_Panel.Top := 56 + 300*(n-1);
+    Cash_Panel.Left := 0;
+    Cash_Panel.Height := 300;
+    Cash_Panel.Width := 810;
+    //ѕанелька с кнопками
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile1';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + inside;
+    OpenFileBtn.Top := 10;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    OpenFileBtn.onClick := OpenFile1Click;
+    //OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
+    // нопка 1
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile2';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewitems;
+    OpenFileBtn.Top := 45;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 2
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile3';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + ibpmark;
+    OpenFileBtn.Top := 80;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 3
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile4';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + sksmount;
+    OpenFileBtn.Top := 115;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 4
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile5';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + kkt;
+    OpenFileBtn.Top := 150;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 5
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile6';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + check;
+    OpenFileBtn.Top := 185;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 6
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile7';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allview;
+    OpenFileBtn.Top := 220;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 7
+    OpenFileBtn:= TBitBtn.Create(obj_MM);
+    OpenFileBtn.Parent := Cash_Panel;
+    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile8';
+    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewbuyer;
+    OpenFileBtn.Top := 255;
+    OpenFileBtn.Left := 15;
+    OpenFileBtn.Height := 30;
+    OpenFileBtn.Width := 280;
+    OpenFileBtn.Margin := 0;
+    OpenFileBtn.Font.Height := 0;
+    OpenFileBtn.Font.Name := 'Times New Roman';
+    // нопка 8
+  end;
 end;
 
 procedure TObj_MM.OpenFile1Click(Sender: TObject);
 begin
-  if Open_photo.Execute then floc_1.Caption := Open_photo.FileName;
+//  if Open_photo.Execute then floc_1.Caption := Open_photo.FileName;
+  label1.Caption:= TButton(Sender).Caption; // «десь получаем текст кнопки на которую нажали (Name получать нельз€ ругаетс€ антивирь 0_о)
+  // ƒальше из имени кнопки нужно будет найти соседний лейбл, когда он будет =) чтобы вывести в него путь
+//    if Open_photo.Execute then (FindComponent('label' + inttostr(cashIndex)) as TLabel).Caption := Open_photo.FileName;
 end;
 
 procedure TObj_MM.OpenFile2Click(Sender: TObject);

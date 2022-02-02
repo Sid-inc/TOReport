@@ -1,11 +1,11 @@
 object Obj_MM: TObj_MM
   Left = 0
   Top = 0
-  Width = 840
-  Height = 650
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #1052#1072#1075#1072#1079#1080#1085' '#1052#1072#1075#1085#1080#1090
+  ClientHeight = 621
+  ClientWidth = 834
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object Obj_MM: TObj_MM
   object object_name: TLabel
     Left = 0
     Top = 0
-    Width = 817
+    Width = 834
     Height = 50
     Align = alTop
     Alignment = taCenter
@@ -50,6 +50,13 @@ object Obj_MM: TObj_MM
     Font.Name = 'System'
     Font.Style = []
     ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 592
+    Top = 24
+    Width = 31
+    Height = 13
+    Caption = 'Label1'
   end
   object Make: TButton
     Left = 664
@@ -274,7 +281,6 @@ object Obj_MM: TObj_MM
       ModalResult = 4
       ParentFont = False
       TabOrder = 0
-      OnClick = OpenFile1Click
     end
     object OpenFile2: TBitBtn
       Left = 15
