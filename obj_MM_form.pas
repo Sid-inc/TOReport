@@ -101,9 +101,10 @@ end;
 
 procedure TObj_MM.FormShow(Sender: TObject);
 var
-  n: integer;           //временно номер кассы для названия кнопок
+  n: integer; //временно номер кассы для названия кнопок
+  BtnToLabel: array[1..5,1..8] of string;
 begin
-  for n := 1 to cashnum do
+  for n := 1 to obj_select_form.Report.Cashcount do
   begin
     Cash_Panel:= TPanel.Create(obj_MM);
     Cash_Panel.Parent := ScrollBox1;
@@ -127,6 +128,7 @@ begin
     OpenFileBtn.Font.Height := 0;
     OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
     OpenFileBtn.Font.Name := 'Times New Roman';
+    OpenFileBtn.Tag := n;
     OpenFileBtn.onClick := OpenFile1Click;
 
     //Лейбл пути 1 файла
@@ -306,16 +308,16 @@ begin
     FlocLb.Left := 310;
     FlocLb.Height := 30;
     FlocLb.Font.Name := 'System';
-
-    end;
+  end;
 end;
 
 procedure TObj_MM.OpenFile1Click(Sender: TObject);
+var btnID: integer;
 begin
 //if Open_photo.Execute then floc_1.Caption := Open_photo.FileName;
-  label1.Caption:= TButton(Sender).Caption; // Здесь получаем текст кнопки на которую нажали (Name получать нельзя ругается антивирь 0_о)
+  btnID := TButton(Sender).Tag; // Здесь получаем текст кнопки на которую нажали (Name получать нельзя ругается антивирь 0_о)
   // Дальше из имени кнопки нужно будет найти соседний лейбл, когда он будет =) чтобы вывести в него путь
-//if Open_photo.Execute then (FindComponent('label' + inttostr(CashIndex)) as TLabel).Caption := Open_photo.FileName;
+  if Open_photo.Execute then (FindComponent('FlocCash' + IntToStr(btnID) + 'Lb1') as TLabel).Caption := Open_photo.FileName;
 end;
 
 procedure TObj_MM.OpenFile2Click(Sender: TObject);

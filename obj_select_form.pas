@@ -60,7 +60,6 @@ type
 var
   obj_sel_form: Tobj_sel_form;
   obj_type: integer;
-  cashnum: integer;
   Report: TReport;
 
   cash, Inside, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
@@ -73,22 +72,22 @@ implementation
 
 procedure Tobj_sel_form.cash_count2Click(Sender: TObject);
 begin
-cashnum := 2;
+Report.Cashcount := 2;
 end;
 
 procedure Tobj_sel_form.cash_count3Click(Sender: TObject);
 begin
-cashnum := 3;
+Report.Cashcount := 3;
 end;
 
 procedure Tobj_sel_form.cash_count4Click(Sender: TObject);
 begin
-cashnum := 4;
+Report.Cashcount := 4;
 end;
 
 procedure Tobj_sel_form.cash_count5Click(Sender: TObject);
 begin
-cashnum := 5;
+Report.Cashcount := 5;
 end;
 
 procedure Tobj_sel_form.FormCreate(Sender: TObject);
@@ -105,13 +104,13 @@ begin
   check := 'Чек';
 
   Report := TReport.Create;
+  Report.Cashcount := 1; //По умолчанию 1 касса
   // Создание глобального объекта Report класса TReport для доступа к тему из любой части программы
 end;
 
 procedure Tobj_sel_form.FormShow(Sender: TObject);
 begin
   obj_type := 0;
-  cashnum := 1;  //По умолчанию 1 касса
 end;
 
 procedure Tobj_sel_form.MAClick(Sender: TObject);
@@ -153,10 +152,8 @@ begin
       ShowMessage('Не выбрана папка сохранения фото!');
       Exit;
       end;
-  if cashnum > 1 then
-    Report.Cashcount := cashnum
+  if Report.Cashcount <= 1 then
     //Если выбран чекбокс с количеством касс продолжаем
-    else
     begin
     ShowMessage('Выберете количество касс!');
     Exit;
