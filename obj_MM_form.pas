@@ -30,7 +30,6 @@ type
     OpenFile7: TBitBtn;
     BtnBlock: TPanel;
     destlock: TLabel;
-    Label1: TLabel;
     ScrollBox1: TScrollBox;
     procedure OpenFile1Click(Sender: TObject);
     procedure OpenFile2Click(Sender: TObject);
@@ -46,6 +45,7 @@ type
       MousePos: TPoint; var Handled: Boolean);
     procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
+    procedure PhotoInputCreate(cashNumber, index, topBtn, topLabel: integer; btnText: string);
 
   private
     { Private declarations }
@@ -117,231 +117,73 @@ begin
     Cash_Panel.Width := 810;
     //Панелька с кнопками
     //Кнопка 1
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile1';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + inside;
-    OpenFileBtn.Top := 10;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-
-    //Лейбл пути 1 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 15;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 10, 15, inside);
     index := index + 1;
 
     //Кнопка 2
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile2';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewitems;
-    OpenFileBtn.Top := 45;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 2 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 51;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 45, 51, allviewitems);
     index := index + 1;
 
     //Кнопка 3
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile3';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + ibpmark;
-    OpenFileBtn.Top := 80;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 3 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 87;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 80, 87, ibpmark);
     index := index + 1;
 
     //Кнопка 4
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile4';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + sksmount;
-    OpenFileBtn.Top := 115;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 4 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 123;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 115, 123, sksmount);
     index := index + 1;
 
     //Кнопка 5
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile5';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + kkt;
-    OpenFileBtn.Top := 150;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 5 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 159;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 150, 159, kkt);
     index := index + 1;
 
     //Кнопка 6
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile6';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + check;
-    OpenFileBtn.Top := 185;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 6 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 195;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 185, 195, check);
     index := index + 1;
 
     //Кнопка 7
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile7';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allview;
-    OpenFileBtn.Top := 220;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 7 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 231;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 220, 231, allview);
     index := index + 1;
 
     //Кнопка 8
-    OpenFileBtn:= TBitBtn.Create(obj_MM);
-    OpenFileBtn.Parent := Cash_Panel;
-    OpenFileBtn.Name := 'cash' + IntToStr(n) + 'OpenFile8';
-    OpenFileBtn.Caption := cash +' '+ IntToStr(n)+' ' + allviewbuyer;
-    OpenFileBtn.Top := 255;
-    OpenFileBtn.Left := 15;
-    OpenFileBtn.Height := 30;
-    OpenFileBtn.Width := 280;
-    OpenFileBtn.Margin := 0;
-    OpenFileBtn.Font.Height := 0;
-    OpenFileBtn.Font.Name := 'Times New Roman';
-    OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-    OpenFileBtn.Tag := index;
-    OpenFileBtn.onClick := OpenFile1Click;
-    //Лейбл пути 8 файла
-    FlocLb:= TLabel.Create(obj_MM);
-    FlocLb.Parent := Cash_Panel;
-    FlocLb.Name := 'FlocCash' + IntToStr(index);
-    FlocLb.Caption := '..';
-    FlocLb.Top := 264;
-    FlocLb.Left := 310;
-    FlocLb.Height := 30;
-    FlocLb.Font.Name := 'System';
-
+    PhotoInputCreate(n, index, 255, 264, allviewbuyer);
     index := index + 1;
   end;
+end;
+
+procedure TObj_MM.PhotoInputCreate(cashNumber, index, topBtn, topLabel: integer; btnText: string);
+begin
+  OpenFileBtn:= TBitBtn.Create(obj_MM);
+  OpenFileBtn.Parent := Cash_Panel;
+  OpenFileBtn.Name := 'cash' + IntToStr(cashNumber) + 'OpenFile' + IntToStr(index);
+  OpenFileBtn.Caption := cash +' '+ IntToStr(cashNumber)+' ' + btnText;
+  OpenFileBtn.Top := topBtn;
+  OpenFileBtn.Left := 15;
+  OpenFileBtn.Height := 30;
+  OpenFileBtn.Width := 280;
+  OpenFileBtn.Margin := 0;
+  OpenFileBtn.Font.Height := 0;
+  OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
+  OpenFileBtn.Font.Name := 'Times New Roman';
+  OpenFileBtn.Tag := index;
+  OpenFileBtn.onClick := OpenFile1Click;
+
+  //Лейбл пути 1 файла
+  FlocLb:= TLabel.Create(obj_MM);
+  FlocLb.Parent := Cash_Panel;
+  FlocLb.Name := 'FlocCash' + IntToStr(index);
+  FlocLb.Caption := '..';
+  FlocLb.Top := topLabel;
+  FlocLb.Left := 310;
+  FlocLb.Height := 30;
+  FlocLb.Font.Name := 'System';
 end;
 
 procedure TObj_MM.OpenFile1Click(Sender: TObject);
 var btnID: integer;
 begin
-//if Open_photo.Execute then floc_1.Caption := Open_photo.FileName;
-  btnID := TButton(Sender).Tag; // Здесь получаем текст кнопки на которую нажали (Name получать нельзя ругается антивирь 0_о)
-  // Дальше из имени кнопки нужно будет найти соседний лейбл, когда он будет =) чтобы вывести в него путь
+  btnID := TButton(Sender).Tag; // Здесь получаем id кнопки на которую нажали
   if Open_photo.Execute then (FindComponent('FlocCash' + IntToStr(btnID)) as TLabel).Caption := Open_photo.FileName;
+  // Ищем соседний с кнопкой лейбл и выводим в него путь к файлу
 end;
 
 procedure TObj_MM.OpenFile2Click(Sender: TObject);
@@ -379,5 +221,7 @@ procedure TObj_MM.OpenFile8Click(Sender: TObject);
 begin
   if Open_photo.Execute then floc_8.Caption := Open_photo.FileName;
 end;
+
+
 
 end.

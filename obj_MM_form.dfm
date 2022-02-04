@@ -53,13 +53,6 @@ object Obj_MM: TObj_MM
     Font.Style = []
     ParentFont = False
   end
-  object Label1: TLabel
-    Left = 592
-    Top = 24
-    Width = 31
-    Height = 13
-    Caption = 'Label1'
-  end
   object Make: TButton
     Left = 664
     Top = 1898
