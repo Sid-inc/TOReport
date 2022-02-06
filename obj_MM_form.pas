@@ -10,36 +10,12 @@ uses
 type
   TObj_MM = class(TForm)
     object_name: TLabel;
-    floc_1: TLabel;
-    floc_3: TLabel;
     Make: TButton;
     Open_photo: TOpenPictureDialog;
-    floc_2: TLabel;
-    floc_4: TLabel;
-    floc_6: TLabel;
-    floc_5: TLabel;
-    floc_7: TLabel;
-    floc_8: TLabel;
-    OpenFile1: TBitBtn;
-    OpenFile2: TBitBtn;
-    OpenFile4: TBitBtn;
-    OpenFile3: TBitBtn;
-    OpenFile6: TBitBtn;
-    OpenFile5: TBitBtn;
-    OpenFile8: TBitBtn;
-    OpenFile7: TBitBtn;
-    BtnBlock: TPanel;
     destlock: TLabel;
     ScrollBox1: TScrollBox;
     procedure OpenFile1Click(Sender: TObject);
-    procedure OpenFile2Click(Sender: TObject);
-    procedure OpenFile3Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure OpenFile4Click(Sender: TObject);
-    procedure OpenFile5Click(Sender: TObject);
-    procedure OpenFile6Click(Sender: TObject);
-    procedure OpenFile7Click(Sender: TObject);
-    procedure OpenFile8Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
@@ -58,7 +34,6 @@ var
   Cash_Panel: TPanel;
   OpenFileBtn: TBitBtn;
   FlocLb : TLabel;
-  i: integer;
   BtnToLabel: array[1..5,1..2] of string;
 
 implementation
@@ -185,43 +160,5 @@ begin
   if Open_photo.Execute then (FindComponent('FlocCash' + IntToStr(btnID)) as TLabel).Caption := Open_photo.FileName;
   // »щем соседний с кнопкой лейбл и выводим в него путь к файлу
 end;
-
-procedure TObj_MM.OpenFile2Click(Sender: TObject);
-begin
-  if Open_photo.Execute then floc_2.Caption := Open_photo.FileName;
-
-end;
-
-procedure TObj_MM.OpenFile3Click(Sender: TObject);
-begin
-  if Open_photo.Execute then floc_3.Caption := Open_photo.FileName;
-end;
-
-procedure TObj_MM.OpenFile4Click(Sender: TObject);
-begin
-  if Open_photo.Execute then floc_4.Caption := Open_photo.FileName;
-end;
-
-procedure TObj_MM.OpenFile5Click(Sender: TObject);
-begin
-if Open_photo.Execute then floc_5.Caption := Open_photo.FileName;
-end;
-
-procedure TObj_MM.OpenFile6Click(Sender: TObject);
-begin
-  if Open_photo.Execute then floc_6.Caption := Open_photo.FileName;
-end;
-
-procedure TObj_MM.OpenFile7Click(Sender: TObject);
-begin
-  if Open_photo.Execute then floc_7.Caption := Open_photo.FileName;
-end;
-
-procedure TObj_MM.OpenFile8Click(Sender: TObject);
-begin
-  if Open_photo.Execute then floc_8.Caption := Open_photo.FileName;
-end;
-
-
 
 end.

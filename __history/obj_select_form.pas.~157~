@@ -1,0 +1,238 @@
+unit obj_select_form;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, obj_MM_form,
+  Vcl.Buttons, FileCtrl, Vcl.ExtCtrls;
+
+type
+  Tobj_sel_form = class(TForm)
+    Start_message: TLabel;
+    Label_name: TLabel;
+    obj_name: TEdit;
+    MM: TRadioButton;
+    MK: TRadioButton;
+    MA: TRadioButton;
+    Label_format: TLabel;
+    next_button: TButton;
+    destdesc: TLabel;
+    destlock: TLabel;
+    OpenDirBtn: TButton;
+    Label_cashcount: TLabel;
+    cash_count2: TRadioButton;
+    cash_count3: TRadioButton;
+    cash_count4: TRadioButton;
+    cash_count5: TRadioButton;
+    obj_type_gr: TPanel;
+    cash_count_gr: TPanel;
+    procedure next_buttonClick(Sender: TObject);
+    procedure MMClick(Sender: TObject);
+    procedure MKClick(Sender: TObject);
+    procedure MAClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure OpenDirBtnClick(Sender: TObject);
+    procedure cash_count2Click(Sender: TObject);
+    procedure cash_count3Click(Sender: TObject);
+    procedure cash_count4Click(Sender: TObject);
+    procedure cash_count5Click(Sender: TObject);
+
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+type
+  TReport = class
+    // Создаем класс TReport для хранения общей информации о отчете
+  public
+    Dlock: String; //Директория сохранения фото
+    Rtype: string; // Свойство класса для хранения типа (ММ, МК, МА)
+    OOname: string; // Название OO
+    Cashcount: integer; // Свойство класса для хранения количества касс
+  end;
+
+var
+  obj_sel_form: Tobj_sel_form;
+  obj_type: integer;
+  Report: TReport;
+
+  cash, inside, insidemk, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
+    check, chekmk, nut, wifi, egais, uksbpmark, uksrout, uksallviewb, uksallviewf, uksallviewm,
+    swith, pcdir, pcserv, printconnect, uksprint, testpage, ukshub, ukshubtd, allitemsmark,
+    ap, mp, tsd, view, mark, chklst, install, plan, prt: string;
+  // Создаем строковые переменные чтобы хронить русский текст для названий файлов
+
+implementation
+
+{$R *.dfm}
+
+procedure Tobj_sel_form.cash_count2Click(Sender: TObject);
+begin
+Report.Cashcount := 2;
+end;
+
+procedure Tobj_sel_form.cash_count3Click(Sender: TObject);
+begin
+Report.Cashcount := 3;
+end;
+
+procedure Tobj_sel_form.cash_count4Click(Sender: TObject);
+begin
+Report.Cashcount := 4;
+end;
+
+procedure Tobj_sel_form.cash_count5Click(Sender: TObject);
+begin
+Report.Cashcount := 5;
+end;
+
+procedure Tobj_sel_form.FormCreate(Sender: TObject);
+// При создании формы записываем русский текст в перменные
+begin
+  //кассы ММ/МК
+  cash := 'Касса';
+  kkt := 'ККТ';
+  ibpmark := 'Маркировка БП';
+  sksmount := 'Монтаж СКС';
+  allviewbuyer := 'Общий вид (покупатель)';
+  allviewitems := 'Общий вид Оборудование';
+  allview := 'Общий вид';
+  inside := 'Внутри';
+  check := 'Чек';
+  allitemsmark := 'Маркировка оборудования';
+  insidemk := 'Обслуженная';
+  chekmk := 'Фото Чека';
+
+  //УКС для ММ
+  nut := 'Служба NUT';
+  wifi := 'УКС Голосовой шлюз (WiFi)';
+  egais := 'УКС ЕГАИС';
+  uksbpmark := 'УКС Маркировка БП';
+  uksrout := 'УКС Микротики';
+  uksallviewb := 'УКС Общий вид сзади';
+  uksallviewf := 'УКС Общий вид спереди';
+  uksallviewm := 'УКС Общий вид центр';
+  swith := 'УКС Переключатель';
+  pcdir := 'УКС ПК Директора';
+  pcserv := 'УКС ПК Сервер';
+  printconnect := 'УКС Принтер подключение';
+  uksprint := 'УКС Принтер';
+  testpage := 'УКС Тестовая печать';
+  ukshub := 'УКС Хаб';
+  ukshubtd := 'УКС Хаб ТД';
+  //УКС для МК
+
+  //Прочие фото
+  ap := 'ТД';
+  mp := 'МП';
+  tsd := 'ТСД';
+  view := 'Вид';
+  mark := 'Маркировка';
+  chklst := 'ЧЛ';
+  install := 'Монтаж';
+  plan := 'Планограмма';
+  prt := 'Печать';
+
+  Report := TReport.Create;
+  Report.Cashcount := 1; //По умолчанию 1 касса
+  // Создание глобального объекта Report класса TReport для доступа к тему из любой части программы
+end;
+
+procedure Tobj_sel_form.FormShow(Sender: TObject);
+begin
+  obj_type := 0;
+end;
+
+procedure Tobj_sel_form.MAClick(Sender: TObject);
+begin
+  obj_type := 3;
+  cash_count2.Checked := True;
+end;
+
+procedure Tobj_sel_form.MKClick(Sender: TObject);
+begin
+  obj_type := 2;
+  cash_count2.Checked := True;
+  end;
+
+procedure Tobj_sel_form.MMClick(Sender: TObject);
+begin
+  obj_type := 1;
+  end;
+
+procedure Tobj_sel_form.next_buttonClick(Sender: TObject);
+begin
+  if obj_name.Text <> '' then
+     Report.OOname := obj_name.Text
+    // Если в поле названия магазина что-то есть, записываем это название в глобальный объект
+    else
+      begin
+      ShowMessage('Введите название объекта!');
+      // Если в поле пусто, выдаем предупреждение
+      Exit;
+      // Прерываем дальнейшее выполнение
+      end;
+  if obj_type = 0 then
+     begin
+       ShowMessage('Не выбран формат ОО!');
+       Exit;
+     end;
+  if destlock.Caption = '..' then
+      begin
+      ShowMessage('Не выбрана папка сохранения фото!');
+      Exit;
+      end;
+  if Report.Cashcount <= 1 then
+    //Если выбран чекбокс с количеством касс продолжаем
+    begin
+    ShowMessage('Выберете количество касс!');
+    Exit;
+    end;
+
+
+  case obj_type of
+    1:
+      begin
+        obj_MM.Show;
+        obj_sel_form.Hide;
+        Report.Rtype := 'ММ'; // Записываем тип отчета в глобальный объект
+      end;
+    2:
+      begin
+        ShowMessage('Форма для МК в разработке..');
+        //obj_MM.Show;
+        //obj_sel_form.Hide;
+        //Report.Rtype := 'МК'; // Записываем тип отчета в глобальный объект
+      end;
+    3:
+      begin
+        ShowMessage('Форма для МА в разработке..');
+        //obj_MM.Show;
+        //obj_sel_form.Hide;
+        //Report.Rtype := 'МА'; // Записываем тип отчета в глобальный объект
+      end;
+    
+  end;
+
+  obj_MM.object_name.Caption := obj_select_form.Report.Rtype + ' ' +
+    obj_select_form.Report.OOname;
+  // Выводим в названии второй формы название и тип ОО
+end;
+
+procedure Tobj_sel_form.OpenDirBtnClick(Sender: TObject);
+var
+  dir: String;
+begin
+  if SelectDirectory ('Выберите папку, для сохранения обработанных фото:', '', dir) then
+    begin
+    destlock.Caption := dir;
+    Report.Dlock := dir;  //передаем классу информацию о пути сохранения фото
+    end;
+end;
+end.

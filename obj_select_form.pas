@@ -62,8 +62,10 @@ var
   obj_type: integer;
   Report: TReport;
 
-  cash, Inside, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
-    check: string;
+  cash, inside, insidemk, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
+    check, chekmk, nut, wifi, egais, bpmark, rout, allviewb, allviewf, allviewm,
+    swith, pcdir, pcdirmk, pcserv, pcservmk, printconnect, a4prt, testpage, hub, hubtd, allitemsmark,
+    ap, mp, tsd, view, mark, chklst, install, plan, prt, uks: string;
   // Создаем строковые переменные чтобы хронить русский текст для названий файлов
 
 implementation
@@ -93,15 +95,51 @@ end;
 procedure Tobj_sel_form.FormCreate(Sender: TObject);
 // При создании формы записываем русский текст в перменные
 begin
+  //кассы ММ
   cash := 'Касса';
-  inside := 'Внутри';
   kkt := 'ККТ';
   ibpmark := 'Маркировка БП';
   sksmount := 'Монтаж СКС';
   allviewbuyer := 'Общий вид (покупатель)';
   allviewitems := 'Общий вид Оборудование';
   allview := 'Общий вид';
+  inside := 'Внутри';
   check := 'Чек';
+  //Для МК
+  allitemsmark := 'Маркировка оборудования';
+  insidemk := 'Обслуженная';
+  chekmk := 'Фото Чека';
+  //УКС для ММ
+  uks := 'УКС';
+  nut := 'Служба NUT';
+  wifi := 'Голосовой шлюз (WiFi)';
+  egais := 'ЕГАИС';
+  bpmark := 'Маркировка БП';
+  rout := 'Микротики';
+  allviewb := 'Общий вид сзади';
+  allviewf := 'Общий вид спереди';
+  allviewm := 'Общий вид центр';
+  swith := 'Переключатель';
+  pcdir := 'ПК Директора';
+  pcserv := 'ПК Сервер';
+  printconnect := 'Принтер подключение';
+  a4prt := 'Принтер';
+  testpage := 'Тестовая печать';
+  hub := 'Хаб';
+  hubtd := 'Хаб ТД';
+  //УКС для МК
+  pcdirmk := 'ПКД';
+  pcservmk := 'Сервер';
+  //Прочие фото
+  ap := 'ТД';
+  mp := 'МП';
+  tsd := 'ТСД';
+  view := 'Вид';
+  mark := 'Маркировка';
+  chklst := 'ЧЛ';
+  install := 'Монтаж';
+  plan := 'Планограмма';
+  prt := 'Печать';
 
   Report := TReport.Create;
   Report.Cashcount := 1; //По умолчанию 1 касса
@@ -123,12 +161,12 @@ procedure Tobj_sel_form.MKClick(Sender: TObject);
 begin
   obj_type := 2;
   cash_count2.Checked := True;
-end;
+  end;
 
 procedure Tobj_sel_form.MMClick(Sender: TObject);
 begin
   obj_type := 1;
-end;
+  end;
 
 procedure Tobj_sel_form.next_buttonClick(Sender: TObject);
 begin
