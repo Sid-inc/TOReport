@@ -4,7 +4,7 @@ object Obj_MM: TObj_MM
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #1052#1072#1075#1072#1079#1080#1085' '#1052#1072#1075#1085#1080#1090
-  ClientHeight = 621
+  ClientHeight = 771
   ClientWidth = 834
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object Obj_MM: TObj_MM
     Left = 0
     Top = 0
     Width = 834
-    Height = 50
+    Height = 40
     Align = alTop
     Alignment = taCenter
     AutoSize = False
@@ -37,8 +37,6 @@ object Obj_MM: TObj_MM
     ParentBiDiMode = False
     ParentFont = False
     Layout = tlCenter
-    ExplicitTop = 3
-    ExplicitWidth = 824
   end
   object destlock: TLabel
     Left = 50
@@ -63,14 +61,14 @@ object Obj_MM: TObj_MM
   end
   object ScrollBox1: TScrollBox
     Left = 0
-    Top = 56
+    Top = 40
     Width = 834
-    Height = 561
+    Height = 737
     TabOrder = 1
   end
   object Open_photo: TOpenPictureDialog
     Filter = 'All|*.png; *.jpg; *.jpeg; *.bmp'
-    Left = 776
+    Left = 800
     Top = 8
   end
 end

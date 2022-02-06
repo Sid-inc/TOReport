@@ -22,7 +22,8 @@ type
     procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
     procedure PhotoInputCreate(cashNumber, index, topBtn, topLabel: integer; btnText: string);
-
+    procedure UksPhotoInputCreate(index, topBtn, topLabel: integer; btnText: string);
+    procedure OtherPhotoInputCreate(index, topBtn, topLabel: integer; btnText: string);
   private
     { Private declarations }
   public
@@ -32,7 +33,11 @@ type
 var
   obj_MM: Tobj_MM;
   Cash_Panel: TPanel;
+  Uks_Panel: TPanel;
+  Other_panel: TPanel;
+  Down_panel: TPanel;
   OpenFileBtn: TBitBtn;
+  Gen_btn: TButton;
   FlocLb : TLabel;
   BtnToLabel: array[1..5,1..2] of string;
 
@@ -77,7 +82,8 @@ end;
 
 procedure TObj_MM.FormShow(Sender: TObject);
 var
-  n, index: integer; //временно номер кассы для названия кнопок
+  n, t, a, m, x, y, index: integer;
+  //где n - для касс, t - для тсд, a - для ТД, m - для МП, x и y для определения точки отсчета компонента, относительно предыдущего
 begin
   index := 0;
   for n := 1 to obj_select_form.Report.Cashcount do
@@ -86,47 +92,201 @@ begin
     Cash_Panel.Parent := ScrollBox1;
     Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
     Cash_Panel.Caption := '';
-    Cash_Panel.Top := 300*(n-1);
+    Cash_Panel.Top := 520*(n-1);
     Cash_Panel.Left := 0;
-    Cash_Panel.Height := 300;
+    Cash_Panel.Height := 520;
     Cash_Panel.Width := 810;
-    //Панелька с кнопками
+    //Панелька с кнопками для касс
     //Кнопка 1
     PhotoInputCreate(n, index, 10, 15, inside);
     index := index + 1;
 
     //Кнопка 2
-    PhotoInputCreate(n, index, 45, 51, allviewitems);
+    PhotoInputCreate(n, index, 46, 52, allviewitems);
     index := index + 1;
 
     //Кнопка 3
-    PhotoInputCreate(n, index, 80, 87, ibpmark);
+    PhotoInputCreate(n, index, 82, 89, ibpmark);
     index := index + 1;
 
     //Кнопка 4
-    PhotoInputCreate(n, index, 115, 123, sksmount);
+    PhotoInputCreate(n, index, 118, 125, sksmount);
     index := index + 1;
 
     //Кнопка 5
-    PhotoInputCreate(n, index, 150, 159, kkt);
+    PhotoInputCreate(n, index, 154, 162, kkt);
     index := index + 1;
 
     //Кнопка 6
-    PhotoInputCreate(n, index, 185, 195, check);
+    PhotoInputCreate(n, index, 190, 197, check);
     index := index + 1;
 
     //Кнопка 7
-    PhotoInputCreate(n, index, 220, 231, allview);
+    PhotoInputCreate(n, index, 226, 233, allview);
     index := index + 1;
 
     //Кнопка 8
-    PhotoInputCreate(n, index, 255, 264, allviewbuyer);
+    PhotoInputCreate(n, index, 262, 270, allviewbuyer);
+    index := index + 1;
+
+    //Кнопка 9
+    PhotoInputCreate(n, index, 298, 306, ke + ' '+ pc);
+    index := index + 1;
+
+    //Кнопка 10
+    PhotoInputCreate(n, index, 334, 342, ke+ ' '+ ibp);
+    index := index + 1;
+
+    //Кнопка 11
+    PhotoInputCreate(n, index, 370, 378, ke +' '+ pinpad);
+    index := index + 1;
+
+    //Кнопка 12
+    PhotoInputCreate(n, index, 406, 414, ke + ' '+ scan);
+    index := index + 1;
+
+    //Кнопка 13
+    PhotoInputCreate(n, index, 442, 450, ke + ' ' + hand);
+    index := index + 1;
+
+    //Кнопка 14
+    PhotoInputCreate(n, index, 478, 486, ke + ' ' + kkt);
     index := index + 1;
   end;
+
+//Панель для фото УКС
+Uks_Panel:= TPanel.Create(obj_MM);
+Uks_Panel.Parent := ScrollBox1;
+Uks_Panel.Name := 'BtnBlock_uks';
+Uks_Panel.Caption := '';
+Uks_Panel.Top := 520*(n-1);
+Uks_Panel.Left := 0;
+Uks_Panel.Height := 600;
+Uks_Panel.Width := 810;
+    //Кнопка 1
+    UksPhotoInputCreate(index, 10, 15, uks+' '+pcdir);
+    index := index + 1;
+    //Кнопка 2
+    UksPhotoInputCreate(index, 46, 52, uks+' '+pcserv);
+    index := index + 1;
+    //Кнопка 3
+    UksPhotoInputCreate(index, 82, 89, uks+' '+egais);
+    index := index + 1;
+    //Кнопка 4
+    UksPhotoInputCreate(index, 118, 125, uks+' '+rout);
+    index := index + 1;
+    //Кнопка 5
+    UksPhotoInputCreate(index, 154, 162, uks+' '+hub);
+    index := index + 1;
+    //Кнопка 6
+    UksPhotoInputCreate(index, 190, 197, uks+' '+hubtd);
+    index := index + 1;
+    //Кнопка 7
+    UksPhotoInputCreate(index, 226, 233, uks+' '+bpmark);
+    index := index + 1;
+    //Кнопка 8
+    UksPhotoInputCreate(index, 262, 269, uks+' '+allviewb);
+    index := index + 1;
+    //Кнопка 9
+    UksPhotoInputCreate(index, 298, 305, uks+' '+allviewf);
+    index := index + 1;
+    //Кнопка 10
+    UksPhotoInputCreate(index, 334, 341, uks+' '+allviewm);
+    index := index + 1;
+    //Кнопка 11
+    UksPhotoInputCreate(index, 370, 378, uks+' '+swith);
+    index := index + 1;
+    //Кнопка 12
+    UksPhotoInputCreate(index, 406, 413, uks+' '+wifi);
+    index := index + 1;
+    //Кнопка 13
+    UksPhotoInputCreate(index, 442, 449, uks+' '+a4prt);
+    index := index + 1;
+    //Кнопка 14
+    UksPhotoInputCreate(index, 478, 486, uks+' '+a4prt+' подключение');
+    index := index + 1;
+    //Кнопка 15
+    UksPhotoInputCreate(index, 514, 522, uks+' '+testpage);
+    index := index + 1;
+    //Кнопка 16
+    UksPhotoInputCreate(index, 550, 558, nut);
+    index := index + 1;
+
+//Панель для прочего
+Other_Panel:= TPanel.Create(obj_MM);
+Other_Panel.Parent := ScrollBox1;
+Other_Panel.Name := 'BtnBlock_other';
+Other_Panel.Caption := '';
+Other_Panel.Top := 600+520*(n-1);
+Other_Panel.Left := 0;
+Other_Panel.Height := (3 + Report.tsdcount*2 + Report.apcount*3 + Report.mpcount*3)*36+15 ;
+Other_Panel.Width := 810;
+    //Кнопка
+    OtherPhotoInputCreate(index, 10, 15, plan);
+    index := index + 1;
+    //Кнопка
+    OtherPhotoInputCreate(index, 46, 52, chklst + ' 1');
+    index := index + 1;
+    //Кнопка
+    OtherPhotoInputCreate(index, 82, 89, chklst + ' 2');
+    index := index + 1;
+
+    //Кнопки ТСД
+    for t := 1 to Report.tsdcount do
+    begin
+    OtherPhotoInputCreate(index, 118+72*(t-1), 125+72*(t-1), tsd+IntToStr(t)+' '+ view);
+    index := index + 1;
+    OtherPhotoInputCreate(index, 154+72*(t-1), 162+72*(t-1), tsd+IntToStr(t)+' '+ ke);
+    index := index + 1;
+    end;
+    x :=  118+72*(t-1);
+    y :=  125+72*(t-1);
+    //Кнопки МП
+    for m := 1 to Report.mpcount do
+    begin
+    OtherPhotoInputCreate(index, x+108*(m-1), y+108*(m-1), mp+IntToStr(m)+' '+ view);
+    index := index + 1;
+    OtherPhotoInputCreate(index, x+36+108*(m-1), y+36+108*(m-1), mp+IntToStr(m)+' '+ prt);
+    index := index + 1;
+    OtherPhotoInputCreate(index, x+72+108*(m-1), y+72+108*(m-1), mp+IntToStr(m)+' '+ ke);
+    index := index + 1;
+    end;
+    x := x+108*(m-1);
+    y := y+108*(m-1);
+    //Кнопки ТД
+    for a := 1 to Report.apcount do
+    begin
+    OtherPhotoInputCreate(index, x+108*(a-1), y+108*(a-1), ap+IntToStr(a)+' '+ mark);
+    index := index + 1;
+    OtherPhotoInputCreate(index, x+36+108*(a-1), y+36+108*(a-1), ap+IntToStr(a)+' '+ install);
+    index := index + 1;
+    OtherPhotoInputCreate(index, x+72+108*(a-1), y+72+108*(a-1), ap+IntToStr(a)+' '+ ke);
+    index := index + 1;
+    end;
+//Нижняя панелька
+Down_panel:= TPanel.Create(obj_MM);
+Down_Panel.Parent := ScrollBox1;
+Down_Panel.Name := 'BtnBlock_down';
+Down_Panel.Caption := '';
+Down_Panel.Top := 600+520*(n-1)+ (3 + Report.tsdcount*2 + Report.apcount*3 + Report.mpcount*3)*36+15;
+Down_Panel.Left := 0;
+Down_Panel.Height := 50 ;
+Down_Panel.Width := 810;
+Gen_btn := TButton.Create(obj_MM);
+Gen_btn.Parent := Down_panel;
+Gen_btn.Name := 'Gen_btn';
+Gen_btn.Caption := 'Сформировать';
+Gen_btn.Top := 10;
+Gen_btn.Left := 500;
+Gen_btn.Height := 30;
+Gen_btn.Width := 280;
+Gen_btn.Font.Height := 0;
+Gen_btn.Font.Name := 'Times New Roman';
 end;
 
 procedure TObj_MM.PhotoInputCreate(cashNumber, index, topBtn, topLabel: integer; btnText: string);
 begin
+  //Кнопки панели Касс
   OpenFileBtn:= TBitBtn.Create(obj_MM);
   OpenFileBtn.Parent := Cash_Panel;
   OpenFileBtn.Name := 'cash' + IntToStr(cashNumber) + 'OpenFile' + IntToStr(index);
@@ -142,10 +302,68 @@ begin
   OpenFileBtn.Tag := index;
   OpenFileBtn.onClick := OpenFile1Click;
 
-  //Лейбл пути 1 файла
+    //Лейбл пути файла
   FlocLb:= TLabel.Create(obj_MM);
   FlocLb.Parent := Cash_Panel;
-  FlocLb.Name := 'FlocCash' + IntToStr(index);
+  FlocLb.Name := 'Floc' + IntToStr(index);
+  FlocLb.Caption := '..';
+  FlocLb.Top := topLabel;
+  FlocLb.Left := 310;
+  FlocLb.Height := 30;
+  FlocLb.Font.Name := 'System';
+end;
+
+procedure TObj_MM.UksPhotoInputCreate(index: Integer; topBtn: Integer; topLabel: Integer; btnText: string);
+begin
+  //Кнопки панели УКС
+  OpenFileBtn:= TBitBtn.Create(obj_MM);
+  OpenFileBtn.Parent := Uks_Panel;
+  OpenFileBtn.Name := 'OpenFile' + IntToStr(index);
+  OpenFileBtn.Caption := btnText;
+  OpenFileBtn.Top := topBtn;
+  OpenFileBtn.Left := 15;
+  OpenFileBtn.Height := 30;
+  OpenFileBtn.Width := 280;
+  OpenFileBtn.Margin := 0;
+  OpenFileBtn.Font.Height := 0;
+  OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
+  OpenFileBtn.Font.Name := 'Times New Roman';
+  OpenFileBtn.Tag := index;
+  OpenFileBtn.onClick := OpenFile1Click;
+
+    //Лейбл пути файла
+  FlocLb:= TLabel.Create(obj_MM);
+  FlocLb.Parent := Uks_Panel;
+  FlocLb.Name := 'Floc' + IntToStr(index);
+  FlocLb.Caption := '..';
+  FlocLb.Top := topLabel;
+  FlocLb.Left := 310;
+  FlocLb.Height := 30;
+  FlocLb.Font.Name := 'System';
+end;
+
+procedure TObj_MM.OtherPhotoInputCreate(index: Integer; topBtn: Integer; topLabel: Integer; btnText: string);
+begin
+//Кнопки панели прочего
+  OpenFileBtn:= TBitBtn.Create(obj_MM);
+  OpenFileBtn.Parent := Other_panel;
+  OpenFileBtn.Name := 'OpenFile' + IntToStr(index);
+  OpenFileBtn.Caption := btnText;
+  OpenFileBtn.Top := topBtn;
+  OpenFileBtn.Left := 15;
+  OpenFileBtn.Height := 30;
+  OpenFileBtn.Width := 280;
+  OpenFileBtn.Margin := 0;
+  OpenFileBtn.Font.Height := 0;
+  OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
+  OpenFileBtn.Font.Name := 'Times New Roman';
+  OpenFileBtn.Tag := index;
+  OpenFileBtn.onClick := OpenFile1Click;
+
+    //Лейбл пути файла
+  FlocLb:= TLabel.Create(obj_MM);
+  FlocLb.Parent := Other_panel;
+  FlocLb.Name := 'Floc' + IntToStr(index);
   FlocLb.Caption := '..';
   FlocLb.Top := topLabel;
   FlocLb.Left := 310;
@@ -157,7 +375,7 @@ procedure TObj_MM.OpenFile1Click(Sender: TObject);
 var btnID: integer;
 begin
   btnID := TButton(Sender).Tag; // Здесь получаем id кнопки на которую нажали
-  if Open_photo.Execute then (FindComponent('FlocCash' + IntToStr(btnID)) as TLabel).Caption := Open_photo.FileName;
+  if Open_photo.Execute then (FindComponent('Floc' + IntToStr(btnID)) as TLabel).Caption := Open_photo.FileName;
   // Ищем соседний с кнопкой лейбл и выводим в него путь к файлу
 end;
 
