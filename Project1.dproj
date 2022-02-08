@@ -89,10 +89,6 @@
             <Form>Obj_MM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="obj_MK_form.pas">
-            <Form>Obj_MK</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="obj_select_form.pas">
             <Form>obj_sel_form</Form>
             <FormType>dfm</FormType>
@@ -505,13 +501,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

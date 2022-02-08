@@ -137,6 +137,13 @@ object obj_sel_form: Tobj_sel_form
     Font.Style = []
     ParentFont = False
   end
+  object watermark: TLabel
+    Left = 32
+    Top = 385
+    Width = 199
+    Height = 13
+    Caption = #1040#1054' '#1058#1072#1085#1076#1077#1088' '#1057#1084#1086#1083#1077#1085#1089#1082#1080#1081' '#1092#1080#1083#1080#1072#1083'. 2022'#1075'.'
+  end
   object obj_name: TEdit
     Left = 272
     Top = 112

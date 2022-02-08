@@ -22,9 +22,7 @@ type
       MousePos: TPoint; var Handled: Boolean);
     procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
-    procedure PhotoInputCreate(cashNumber, index, topBtn, topLabel: integer; btnText, keId: string);
-    procedure UksPhotoInputCreate(index, topBtn, topLabel: integer; btnText: string);
-    procedure OtherPhotoInputCreate(index, topBtn, topLabel: integer; btnText: string);
+    procedure PhotoInputCreate(index, topBtn, topLabel: integer; pr_pan: TWinControl; btnText, keId: string);
     procedure RenameButtonClick(Sender: TObject);
   private
     { Private declarations }
@@ -53,20 +51,6 @@ begin
   obj_sel_form.Close;
 end;
 
-
-//procedure TObj_MM.MakeClick(Sender: TObject);
-//var
-//  cash1_path, cash2_path, cash3_path, dest_folder: string;
-//begin
-//  dest_folder := destlock.Caption; // Получаем путь к целевой папке
-//  cash1_path := floc_1.Caption; // Получаем путь к фото кассы 1 из лейбла
-//  cash2_path := floc_2.Caption; // Получаем путь к фото кассы 2 из лейбла
-//  cash3_path := floc_3.Caption; // Получаем путь к фото кассы 3 из лейбла
-//  if RenameFile(cash1_path, dest_folder + '\' + 'Касса 1 Общий вид' + '.jpg') then
-//    ShowMessage('Файл кассы 1 переименован'); // Переименование 1го файла первой кассы
-
- //end;
-
 procedure TObj_MM.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
@@ -86,6 +70,7 @@ var
   n, t, a, m, x, y, index: integer;
   //где n - для касс, t - для тсд, a - для ТД, m - для МП, x и y для определения точки отсчета компонента, относительно предыдущего
 begin
+  obj_MM.Caption := obj_select_form.Report.OOname;
   index := 0;
   for n := 1 to obj_select_form.Report.Cashcount do
   begin
@@ -93,66 +78,83 @@ begin
     Cash_Panel.Parent := ScrollBox1;
     Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
     Cash_Panel.Caption := '';
-    Cash_Panel.Top := 520*(n-1);
+    Cash_Panel.Top := 560*(n-1);
     Cash_Panel.Left := 0;
-    Cash_Panel.Height := 520;
+    Cash_Panel.Height := 560;
     Cash_Panel.Width := 810;
     //Панелька с кнопками для касс
     //Кнопка 1
-    PhotoInputCreate(n, index, 10, 15, inside, '');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, 10, 15, Cash_Panel, cash +' '+ IntToStr(n)+' ' + inside, '');
+    index := index + 1;
+    end
+    else
+    PhotoInputCreate(index, 10, 15, Cash_Panel, cash +' '+ IntToStr(n)+' ' + insidemk, '');
     index := index + 1;
 
     //Кнопка 2
-    PhotoInputCreate(n, index, 46, 52, allviewitems, '');
+    PhotoInputCreate(index, 46, 52, Cash_Panel, cash +' '+ IntToStr(n)+' ' + allviewitems, '');
     index := index + 1;
-
     //Кнопка 3
-    PhotoInputCreate(n, index, 82, 89, ibpmark, '');
+    PhotoInputCreate(index, 82, 89, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ibpmark, '');
     index := index + 1;
 
     //Кнопка 4
-    PhotoInputCreate(n, index, 118, 125, sksmount, '');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, 118, 125, Cash_Panel, cash +' '+ IntToStr(n)+' ' + sksmount, '');
+    index := index + 1;
+    end
+    else
+    PhotoInputCreate(index, 118, 125, Cash_Panel, cash +' '+ IntToStr(n)+' ' + allitemsmark, '');
     index := index + 1;
 
     //Кнопка 5
-    PhotoInputCreate(n, index, 154, 162, kkt, '');
+    PhotoInputCreate(index, 154, 162, Cash_Panel, cash +' '+ IntToStr(n)+' ' + kkt, '');
     index := index + 1;
-
     //Кнопка 6
-    PhotoInputCreate(n, index, 190, 197, check, '');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, 190, 197, Cash_Panel, cash +' '+ IntToStr(n)+' ' + check, '');
+    index := index + 1;
+    end
+    else
+    PhotoInputCreate(index, 190, 197, Cash_Panel, cash +' '+ IntToStr(n)+' ' + checkmk, '');
     index := index + 1;
 
     //Кнопка 7
-    PhotoInputCreate(n, index, 226, 233, allview, '');
+    PhotoInputCreate(index, 226, 233, Cash_Panel, cash +' '+ IntToStr(n)+' ' + allview, '');
     index := index + 1;
-
     //Кнопка 8
-    PhotoInputCreate(n, index, 262, 270, allviewbuyer, '');
+    PhotoInputCreate(index, 262, 270, Cash_Panel, cash +' '+ IntToStr(n)+' ' + allviewbuyer, '');
     index := index + 1;
-
     //Кнопка 9
-    PhotoInputCreate(n, index, 298, 306, ke + ' '+ pc, '1');
+    PhotoInputCreate(index, 298, 306, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke + ' '+ pc, '1');
     index := index + 1;
-
     //Кнопка 10
-    PhotoInputCreate(n, index, 334, 342, ke+ ' '+ ibp, '1');
+    PhotoInputCreate(index, 334, 342, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke+ ' '+ ibp, '1');
     index := index + 1;
-
     //Кнопка 11
-    PhotoInputCreate(n, index, 370, 378, ke +' '+ pinpad, '1');
+    PhotoInputCreate(index, 370, 378, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke +' '+ pinpad, '1');
     index := index + 1;
-
     //Кнопка 12
-    PhotoInputCreate(n, index, 406, 414, ke + ' '+ scan, '1');
+    PhotoInputCreate(index, 406, 414, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke + ' '+ scan, '1');
     index := index + 1;
-
     //Кнопка 13
-    PhotoInputCreate(n, index, 442, 450, ke + ' ' + hand, '1');
+    PhotoInputCreate(index, 442, 450, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke + ' ' + hand, '1');
     index := index + 1;
-
     //Кнопка 14
-    PhotoInputCreate(n, index, 478, 486, ke + ' ' + kkt, '1');
+    PhotoInputCreate(index, 478, 486, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke + ' ' + kkt, '1');
     index := index + 1;
+    //Кнопка 15
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, 514, 522, Cash_Panel, cash +' '+ IntToStr(n)+' ' + ke + ' ' + scales, '1');
+    index := index + 1;
+    end;
+
+
   end;
 
     //Панель для фото УКС
@@ -160,88 +162,119 @@ begin
     Uks_Panel.Parent := ScrollBox1;
     Uks_Panel.Name := 'BtnBlock_uks';
     Uks_Panel.Caption := '';
-    Uks_Panel.Top := 520*(n-1);
+    Uks_Panel.Top := 560*(n-1);
     Uks_Panel.Left := 0;
-    Uks_Panel.Height := 600;
+    Uks_Panel.Height := 985;
     Uks_Panel.Width := 810;
 
     //Кнопка 1
-    UksPhotoInputCreate(index, 10, 15, uks+' '+pcdir);
+    PhotoInputCreate(index, 10, 15, Uks_Panel, uks+' '+pcdir, '');
     index := index + 1;
     //Кнопка 2
-    UksPhotoInputCreate(index, 46, 52, uks+' '+pcserv);
+    PhotoInputCreate(index, 46, 52, Uks_Panel, uks+' '+pcserv, '');
     index := index + 1;
     //Кнопка 3
-    UksPhotoInputCreate(index, 82, 89, uks+' '+egais);
+    PhotoInputCreate(index, 82, 89, Uks_Panel, uks+' '+egais, '');
     index := index + 1;
     //Кнопка 4
-    UksPhotoInputCreate(index, 118, 125, uks+' '+rout);
+    PhotoInputCreate(index, 118, 125, Uks_Panel, uks+' '+rout, '');
     index := index + 1;
     //Кнопка 5
-    UksPhotoInputCreate(index, 154, 162, uks+' '+hub);
+    PhotoInputCreate(index, 154, 162, Uks_Panel, uks+' '+hub, '');
     index := index + 1;
     //Кнопка 6
-    UksPhotoInputCreate(index, 190, 197, uks+' '+hubtd);
+    PhotoInputCreate(index, 190, 197, Uks_Panel, uks+' '+hubtd, '');
     index := index + 1;
     //Кнопка 7
-    UksPhotoInputCreate(index, 226, 233, uks+' '+bpmark);
+    PhotoInputCreate(index, 226, 233, Uks_Panel, uks+' '+bpmark, '');
     index := index + 1;
     //Кнопка 8
-    UksPhotoInputCreate(index, 262, 269, uks+' '+allviewb);
+    PhotoInputCreate(index, 262, 269, Uks_Panel, uks+' '+allviewb, '');
     index := index + 1;
     //Кнопка 9
-    UksPhotoInputCreate(index, 298, 305, uks+' '+allviewf);
+    PhotoInputCreate(index, 298, 305, Uks_Panel, uks+' '+allviewf, '');
     index := index + 1;
     //Кнопка 10
-    UksPhotoInputCreate(index, 334, 341, uks+' '+allviewm);
+    PhotoInputCreate(index, 334, 341, Uks_Panel, uks+' '+allviewm, '');
     index := index + 1;
     //Кнопка 11
-    UksPhotoInputCreate(index, 370, 378, uks+' '+swith);
+    PhotoInputCreate(index, 370, 378, Uks_Panel, uks+' '+swith, '');
     index := index + 1;
     //Кнопка 12
-    UksPhotoInputCreate(index, 406, 413, uks+' '+wifi);
+    PhotoInputCreate(index, 406, 413, Uks_Panel, uks+' '+wifi + ' (WiFi)', '');
     index := index + 1;
     //Кнопка 13
-    UksPhotoInputCreate(index, 442, 449, uks+' '+a4prt);
+    PhotoInputCreate(index, 442, 449, Uks_Panel, uks+' '+a4prt, '');
     index := index + 1;
     //Кнопка 14
-    UksPhotoInputCreate(index, 478, 486, uks+' '+a4prt+' подключение');
+    PhotoInputCreate(index, 478, 486, Uks_Panel, uks+' '+a4prt+' подключение', '');
     index := index + 1;
     //Кнопка 15
-    UksPhotoInputCreate(index, 514, 522, uks+' '+testpage);
+    PhotoInputCreate(index, 514, 522, Uks_Panel, uks+' '+testpage, '');
     index := index + 1;
     //Кнопка 16
-    UksPhotoInputCreate(index, 550, 558, nut);
+    PhotoInputCreate(index, 550, 558, Uks_Panel, nut, '');
     index := index + 1;
-
+    //Кнопка 17
+    PhotoInputCreate(index, 586, 594, Uks_Panel, uks+' '+ pcdirmk + ' ' + ke, '1');
+    index := index + 1;
+    //Кнопка 18
+    PhotoInputCreate(index, 622, 630, Uks_Panel, uks+' '+ ibp + ' ' + pcdirmk+ ' ' + ke, '1');
+    index := index + 1;
+    //Кнопка 19
+    PhotoInputCreate(index, 658, 666, Uks_Panel, uks+' '+ pc + ' ' + pcservmk + ' ' + ke, '1');
+    index := index + 1;
+    //Кнопка 20
+    PhotoInputCreate(index, 694, 702, Uks_Panel, uks+' '+ ibp + ' ' + pcservmk + ' ' + ke, '1');
+    index := index + 1;
+    //Кнопка 21
+    PhotoInputCreate(index, 730, 738, Uks_Panel, uks+' ' + mon19 + ' ' +ke, '1');
+    index := index + 1;
+    //Кнопка 22
+    PhotoInputCreate(index, 766, 774, Uks_Panel, uks+' ' + wifi + ' '+ ke, '1');
+    index := index + 1;
+    //Кнопка 23
+    PhotoInputCreate(index, 802, 810, Uks_Panel, uks+' ' + a4prt + ' '+ ke, '1');
+    index := index + 1;
+    //Кнопка 24
+    PhotoInputCreate(index, 838, 846, Uks_Panel, uks+' ' + a4scan + ' ' + ke, '1');
+    index := index + 1;
+    //Кнопка 25
+    PhotoInputCreate(index, 874, 882, Uks_Panel, uks+' ' + master + ' ' +ke, '1');
+    index := index + 1;
+    //Кнопка 26
+    PhotoInputCreate(index, 910, 918, Uks_Panel, uks+' ' + reserv + ' ' + ke, '1');
+    index := index + 1;
+    //Кнопка 27
+    PhotoInputCreate(index, 946, 954, Uks_Panel, floor_scales + ' ' + ke, '1');
+    index := index + 1;
 
     //Панель для прочего
     Other_Panel:= TPanel.Create(obj_MM);
     Other_Panel.Parent := ScrollBox1;
     Other_Panel.Name := 'BtnBlock_other';
     Other_Panel.Caption := '';
-    Other_Panel.Top := 600+520*(n-1);
+    Other_Panel.Top := 985+560*(n-1);
     Other_Panel.Left := 0;
     Other_Panel.Height := (3 + Report.tsdcount*2 + Report.apcount*3 + Report.mpcount*3)*36+15 ;
     Other_Panel.Width := 810;
 
-
     //Кнопка
-    OtherPhotoInputCreate(index, 10, 15, plan);
+    PhotoInputCreate(index, 10, 15, Other_panel, plan, '');
     index := index + 1;
     //Кнопка
-    OtherPhotoInputCreate(index, 46, 52, chklst + ' 1');
+    PhotoInputCreate(index, 46, 52, Other_panel, chklst + ' 1', '');
     index := index + 1;
     //Кнопка
-    OtherPhotoInputCreate(index, 82, 89, chklst + ' 2');
+    PhotoInputCreate(index, 82, 89, Other_panel, chklst + ' 2','');
     index := index + 1;
 
     //Кнопки ТСД
     for t := 1 to Report.tsdcount do
     begin
-    OtherPhotoInputCreate(index, 118+72*(t-1), 125+72*(t-1), tsd+IntToStr(t)+' '+ view);
+    PhotoInputCreate(index, 118+72*(t-1), 125+72*(t-1), Other_panel, tsd+IntToStr(t)+' '+ view, '');
     index := index + 1;
-    OtherPhotoInputCreate(index, 154+72*(t-1), 162+72*(t-1), tsd+IntToStr(t)+' '+ ke);
+    PhotoInputCreate(index, 154+72*(t-1), 162+72*(t-1), Other_panel, tsd+IntToStr(t)+' '+ ke, '1');
     index := index + 1;
     end;
     x :=  118+72*(t-1);
@@ -249,11 +282,11 @@ begin
     //Кнопки МП
     for m := 1 to Report.mpcount do
     begin
-    OtherPhotoInputCreate(index, x+108*(m-1), y+108*(m-1), mp+IntToStr(m)+' '+ view);
+    PhotoInputCreate(index, x+108*(m-1), y+108*(m-1), Other_panel, mp+IntToStr(m)+' '+ view, '');
     index := index + 1;
-    OtherPhotoInputCreate(index, x+36+108*(m-1), y+36+108*(m-1), mp+IntToStr(m)+' '+ prt);
+    PhotoInputCreate(index, x+36+108*(m-1), y+36+108*(m-1), Other_panel, mp+IntToStr(m)+' '+ prt, '');
     index := index + 1;
-    OtherPhotoInputCreate(index, x+72+108*(m-1), y+72+108*(m-1), mp+IntToStr(m)+' '+ ke);
+    PhotoInputCreate(index, x+72+108*(m-1), y+72+108*(m-1), Other_panel, mp+IntToStr(m)+' '+ ke, '1');
     index := index + 1;
     end;
     x := x+108*(m-1);
@@ -261,41 +294,23 @@ begin
     //Кнопки ТД
     for a := 1 to Report.apcount do
     begin
-    OtherPhotoInputCreate(index, x+108*(a-1), y+108*(a-1), ap+IntToStr(a)+' '+ mark);
+    PhotoInputCreate(index, x+108*(a-1), y+108*(a-1), Other_panel, ap+IntToStr(a)+' '+ mark, '');
     index := index + 1;
-    OtherPhotoInputCreate(index, x+36+108*(a-1), y+36+108*(a-1), ap+IntToStr(a)+' '+ install);
+    PhotoInputCreate(index, x+36+108*(a-1), y+36+108*(a-1), Other_panel, ap+IntToStr(a)+' '+ install, '');
     index := index + 1;
-    OtherPhotoInputCreate(index, x+72+108*(a-1), y+72+108*(a-1), ap+IntToStr(a)+' '+ ke);
+    PhotoInputCreate(index, x+72+108*(a-1), y+72+108*(a-1), Other_panel, ap+IntToStr(a)+' '+ ke, '1');
     index := index + 1;
     end;
-//Нижняя панелька
-//Down_panel:= TPanel.Create(obj_MM);
-//Down_Panel.Parent := ScrollBox1;
-//Down_Panel.Name := 'BtnBlock_down';
-//Down_Panel.Caption := '';
-//Down_Panel.Top := 600+520*(n-1)+ (3 + Report.tsdcount*2 + Report.apcount*3 + Report.mpcount*3)*36+15;
-//Down_Panel.Left := 0;
-//Down_Panel.Height := 50 ;
-//Down_Panel.Width := 810;
-//Gen_btn := TButton.Create(obj_MM);
-//Gen_btn.Parent := Down_panel;
-//Gen_btn.Name := 'Gen_btn';
-//Gen_btn.Caption := 'Сформировать';
-//Gen_btn.Top := 10;
-//Gen_btn.Left := 500;
-//Gen_btn.Height := 30;
-//Gen_btn.Width := 280;
-//Gen_btn.Font.Height := 0;
-//Gen_btn.Font.Name := 'Times New Roman';
+
 end;
 
-procedure TObj_MM.PhotoInputCreate(cashNumber, index, topBtn, topLabel: integer; btnText, keId: string);
+procedure TObj_MM.PhotoInputCreate(index, topBtn, topLabel: integer; pr_pan: TWinControl; btnText, keId: string);
 begin
   //Кнопки панели Касс
   OpenFileBtn:= TBitBtn.Create(obj_MM);
-  OpenFileBtn.Parent := Cash_Panel;
-  OpenFileBtn.Name := 'cash' + IntToStr(cashNumber) + 'OpenFile' + IntToStr(index);
-  OpenFileBtn.Caption := cash +' '+ IntToStr(cashNumber)+' ' + btnText;
+  OpenFileBtn.Parent := pr_pan;
+  OpenFileBtn.Name := 'OpenFile' + IntToStr(index);
+  OpenFileBtn.Caption := btnText;
   OpenFileBtn.Top := topBtn;
   OpenFileBtn.Left := 15;
   OpenFileBtn.Height := 30;
@@ -312,7 +327,7 @@ begin
 
     //Лейбл пути файла
   FlocLb:= TLabel.Create(obj_MM);
-  FlocLb.Parent := Cash_Panel;
+  FlocLb.Parent := pr_pan;
   FlocLb.Name := 'Floc' + IntToStr(index);
   FlocLb.Caption := '..';
   FlocLb.Top := topLabel;
@@ -325,7 +340,7 @@ procedure TObj_MM.RenameButtonClick(Sender: TObject);
 var MainDir: string;
  item, properti: integer;
 begin
-  MainDir := obj_select_form.Report.Dlock + '\' + obj_select_form.Report.Rtype + ' ' + obj_select_form.Report.OOname;
+  MainDir := obj_select_form.Report.Dlock + '\' + obj_select_form.Report.OOname;
   if CreateDir(MainDir) then // Создаем папку с названием магазина
   begin
     CreateDir(MainDir + '\' + ke); // Создаем папку для КЕ
@@ -343,64 +358,6 @@ begin
   end
   else
    ShowMessage('Ошибка: папка не создана. Папка уже существует или нет доступа к файловой системе.');
-end;
-
-procedure TObj_MM.UksPhotoInputCreate(index: Integer; topBtn: Integer; topLabel: Integer; btnText: string);
-begin
-  //Кнопки панели УКС
-  OpenFileBtn:= TBitBtn.Create(obj_MM);
-  OpenFileBtn.Parent := Uks_Panel;
-  OpenFileBtn.Name := 'OpenFile' + IntToStr(index);
-  OpenFileBtn.Caption := btnText;
-  OpenFileBtn.Top := topBtn;
-  OpenFileBtn.Left := 15;
-  OpenFileBtn.Height := 30;
-  OpenFileBtn.Width := 280;
-  OpenFileBtn.Margin := 0;
-  OpenFileBtn.Font.Height := 0;
-  OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-  OpenFileBtn.Font.Name := 'Times New Roman';
-  OpenFileBtn.Tag := index;
-  OpenFileBtn.onClick := OpenFile1Click;
-
-    //Лейбл пути файла
-  FlocLb:= TLabel.Create(obj_MM);
-  FlocLb.Parent := Uks_Panel;
-  FlocLb.Name := 'Floc' + IntToStr(index);
-  FlocLb.Caption := '..';
-  FlocLb.Top := topLabel;
-  FlocLb.Left := 310;
-  FlocLb.Height := 30;
-  FlocLb.Font.Name := 'System';
-end;
-
-procedure TObj_MM.OtherPhotoInputCreate(index: Integer; topBtn: Integer; topLabel: Integer; btnText: string);
-begin
-//Кнопки панели прочего
-  OpenFileBtn:= TBitBtn.Create(obj_MM);
-  OpenFileBtn.Parent := Other_panel;
-  OpenFileBtn.Name := 'OpenFile' + IntToStr(index);
-  OpenFileBtn.Caption := btnText;
-  OpenFileBtn.Top := topBtn;
-  OpenFileBtn.Left := 15;
-  OpenFileBtn.Height := 30;
-  OpenFileBtn.Width := 280;
-  OpenFileBtn.Margin := 0;
-  OpenFileBtn.Font.Height := 0;
-  OpenFileBtn.Glyph.LoadFromFile('files/add_file_30x30.bmp');
-  OpenFileBtn.Font.Name := 'Times New Roman';
-  OpenFileBtn.Tag := index;
-  OpenFileBtn.onClick := OpenFile1Click;
-
-    //Лейбл пути файла
-  FlocLb:= TLabel.Create(obj_MM);
-  FlocLb.Parent := Other_panel;
-  FlocLb.Name := 'Floc' + IntToStr(index);
-  FlocLb.Caption := '..';
-  FlocLb.Top := topLabel;
-  FlocLb.Left := 310;
-  FlocLb.Height := 30;
-  FlocLb.Font.Name := 'System';
 end;
 
 procedure TObj_MM.OpenFile1Click(Sender: TObject);
