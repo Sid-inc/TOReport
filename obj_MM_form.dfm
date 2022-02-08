@@ -4,7 +4,7 @@ object Obj_MM: TObj_MM
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #1052#1072#1075#1072#1079#1080#1085' '#1052#1072#1075#1085#1080#1090
-  ClientHeight = 771
+  ClientHeight = 817
   ClientWidth = 834
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -65,6 +65,21 @@ object Obj_MM: TObj_MM
     Width = 834
     Height = 737
     TabOrder = 1
+  end
+  object RenameButton: TButton
+    Left = 656
+    Top = 784
+    Width = 161
+    Height = 25
+    Caption = #1055#1077#1088#1077#1080#1084#1080#1085#1072#1074#1072#1090#1090#1090'!!!'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnClick = RenameButtonClick
   end
   object Open_photo: TOpenPictureDialog
     Filter = 'All|*.png; *.jpg; *.jpeg; *.bmp'

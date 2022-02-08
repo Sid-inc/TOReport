@@ -95,6 +95,7 @@ type
     tsdcount: integer;  //Количество ТСД
     mpcount: integer;   //Количество мобильных принтеров
     apcount: integer;   //Количество точек доступа
+    photos: array [1..200, 1..3] of string; // Массив для хранения данных о фото
   end;
 
 var
