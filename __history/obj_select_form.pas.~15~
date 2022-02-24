@@ -48,7 +48,7 @@ type
     mp_count2: TRadioButton;
     mp_count3: TRadioButton;
     cash_count6: TRadioButton;
-    mark: TLabel;
+    watermark: TLabel;
     procedure next_buttonClick(Sender: TObject);
     procedure MMClick(Sender: TObject);
     procedure MKClick(Sender: TObject);
@@ -105,7 +105,7 @@ var
   Report: TReport;
 
   cash, inside, insidemk, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
-    check, chekmk, nut, wifi, egais, bpmark, rout, allviewb, allviewf, allviewm,
+    check, checkmk, nut, wifi, egais, bpmark, rout, allviewb, allviewf, allviewm,
     swith, pcdir, pcdirmk, pcserv, pcservmk, printconnect, a4prt, testpage, hub, hubtd, allitemsmark,
     ap, mp, tsd, view, mark, chklst, install, plan, prt, uks, ke, pc, ibp, pinpad, scan, hand, scales,
     floor_scales, mon19, a4scan, master, reserv: string;
@@ -188,7 +188,7 @@ begin
   //Для МК
   allitemsmark := 'Маркировка оборудования';
   insidemk := 'Обслуженная';
-  chekmk := 'Фото Чека';
+  checkmk := 'Фото Чека';
   //УКС для ММ
   uks := 'УКС';
   nut := 'Служба NUT';
@@ -345,13 +345,13 @@ begin
       begin
         obj_MM.Show;
         obj_sel_form.Hide;
-        Report.Rtype := 'ММ'; // Записываем тип отчета в глобальный объект
+        Report.Rtype := 'MM'; // Записываем тип отчета в глобальный объект
       end;
     2:
       begin
         obj_MM.Show;
         obj_sel_form.Hide;
-        Report.Rtype := 'МК'; // Записываем тип отчета в глобальный объект
+        Report.Rtype := 'MK'; // Записываем тип отчета в глобальный объект
       end;
     3:
       begin

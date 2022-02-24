@@ -24,10 +24,12 @@ type
       MousePos: TPoint; var Handled: Boolean);
     procedure PhotoInputCreate(index, topBtn, topLabel: integer; pr_pan: TWinControl; btnText, keId: string);
     procedure RenameButtonClick(Sender: TObject);
+    procedure CreateParams(var Params: TCreateParams); override;
   private
     { Private declarations }
   public
     { Public declarations }
+
   end;
 
 var
@@ -45,6 +47,12 @@ implementation
   uses obj_select_form;
 
 {$R *.dfm}
+
+procedure TObj_MM.CreateParams (var Params: TCreateParams);
+begin
+inherited CreateParams(Params);
+  Params.WndParent:= GetDesktopWindow; // дочерняя форма рабочего стола
+end;
 
 procedure TObj_MM.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -67,10 +75,10 @@ end;
 
 procedure TObj_MM.FormShow(Sender: TObject);
 var
-  n, t, a, m, x, y, index: integer;
+  n, t, a, m, x, y, u, u1, index: integer;
   //где n - для касс, t - для тсд, a - для ТД, m - для МП, x и y для определения точки отсчета компонента, относительно предыдущего
 begin
-  obj_MM.Caption := obj_select_form.Report.OOname;
+  obj_MM.Caption := 'Форма отчета для ' + obj_select_form.Report.Rtype;
   index := 0;
   for n := 1 to obj_select_form.Report.Cashcount do
   begin
@@ -78,10 +86,15 @@ begin
     Cash_Panel.Parent := ScrollBox1;
     Cash_Panel.Name := 'BtnBlock' + IntToStr(n);
     Cash_Panel.Caption := '';
-    Cash_Panel.Top := 560*(n-1);
     Cash_Panel.Left := 0;
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
     Cash_Panel.Height := 560;
+    end
+    else
+    Cash_Panel.Height := 524;
     Cash_Panel.Width := 810;
+    Cash_Panel.Top := Cash_Panel.Height *(n-1);
     //Панелька с кнопками для касс
     //Кнопка 1
     if obj_select_form.Report.Rtype = 'MM' then
@@ -162,99 +175,221 @@ begin
     Uks_Panel.Parent := ScrollBox1;
     Uks_Panel.Name := 'BtnBlock_uks';
     Uks_Panel.Caption := '';
-    Uks_Panel.Top := 560*(n-1);
+    Uks_Panel.Top := Cash_Panel.Height *(n-1);
     Uks_Panel.Left := 0;
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
     Uks_Panel.Height := 985;
+    end
+    else
+    Uks_Panel.Height := 913;
     Uks_Panel.Width := 810;
-
+    //начало отсчета для кнопок
+    u := 10;
+    u1 := 15;
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
     //Кнопка 1
-    PhotoInputCreate(index, 10, 15, Uks_Panel, uks+' '+pcdir, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+pcdir, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 2
-    PhotoInputCreate(index, 46, 52, Uks_Panel, uks+' '+pcserv, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+pcserv, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end
+    else
+    begin
+    //Кнопка 1
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+pcdirmk, '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    //Кнопка 2
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+pcservmk, '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end;
     //Кнопка 3
-    PhotoInputCreate(index, 82, 89, Uks_Panel, uks+' '+egais, '');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+egais, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end;
     //Кнопка 4
-    PhotoInputCreate(index, 118, 125, Uks_Panel, uks+' '+rout, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+rout, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 5
-    PhotoInputCreate(index, 154, 162, Uks_Panel, uks+' '+hub, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+hub, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 6
-    PhotoInputCreate(index, 190, 197, Uks_Panel, uks+' '+hubtd, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+hubtd, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 7
-    PhotoInputCreate(index, 226, 233, Uks_Panel, uks+' '+bpmark, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+bpmark, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    //Кнопка маркировка БП2 для МК
+    if obj_select_form.Report.Rtype = 'MK' then
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+bpmark + ' 2', '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end;
     //Кнопка 8
-    PhotoInputCreate(index, 262, 269, Uks_Panel, uks+' '+allviewb, '');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allviewb, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 9
-    PhotoInputCreate(index, 298, 305, Uks_Panel, uks+' '+allviewf, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allviewf, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 10
-    PhotoInputCreate(index, 334, 341, Uks_Panel, uks+' '+allviewm, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allviewm, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end
+    else
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allview + ' 1', '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    //Кнопка 9
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allview + ' 2', '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    //Кнопка 10
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allview + ' 3' , '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end;
     //Кнопка 11
-    PhotoInputCreate(index, 370, 378, Uks_Panel, uks+' '+swith, '');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+swith, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end
+    else
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allviewbuyer, '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end;
     //Кнопка 12
-    PhotoInputCreate(index, 406, 413, Uks_Panel, uks+' '+wifi + ' (WiFi)', '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+wifi + ' (WiFi)', '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 13
-    PhotoInputCreate(index, 442, 449, Uks_Panel, uks+' '+a4prt, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+a4prt, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 14
-    PhotoInputCreate(index, 478, 486, Uks_Panel, uks+' '+a4prt+' подключение', '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+a4prt+' подключение', '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 15
-    PhotoInputCreate(index, 514, 522, Uks_Panel, uks+' '+testpage, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+testpage, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 16
-    PhotoInputCreate(index, 550, 558, Uks_Panel, nut, '');
+    PhotoInputCreate(index, u, u1, Uks_Panel, nut, '');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 17
-    PhotoInputCreate(index, 586, 594, Uks_Panel, uks+' '+ pcdirmk + ' ' + ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+ pcdirmk + ' ' + ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 18
-    PhotoInputCreate(index, 622, 630, Uks_Panel, uks+' '+ ibp + ' ' + pcdirmk+ ' ' + ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+ ibp + ' ' + pcdirmk+ ' ' + ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 19
-    PhotoInputCreate(index, 658, 666, Uks_Panel, uks+' '+ pc + ' ' + pcservmk + ' ' + ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+ pc + ' ' + pcservmk + ' ' + ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 20
-    PhotoInputCreate(index, 694, 702, Uks_Panel, uks+' '+ ibp + ' ' + pcservmk + ' ' + ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+ ibp + ' ' + pcservmk + ' ' + ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 21
-    PhotoInputCreate(index, 730, 738, Uks_Panel, uks+' ' + mon19 + ' ' +ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' ' + mon19 + ' ' +ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 22
-    PhotoInputCreate(index, 766, 774, Uks_Panel, uks+' ' + wifi + ' '+ ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' ' + wifi + ' '+ ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 23
-    PhotoInputCreate(index, 802, 810, Uks_Panel, uks+' ' + a4prt + ' '+ ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' ' + a4prt + ' '+ ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 24
-    PhotoInputCreate(index, 838, 846, Uks_Panel, uks+' ' + a4scan + ' ' + ke, '1');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' ' + a4scan + ' ' + ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+    end;
     //Кнопка 25
-    PhotoInputCreate(index, 874, 882, Uks_Panel, uks+' ' + master + ' ' +ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' ' + master + ' ' +ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 26
-    PhotoInputCreate(index, 910, 918, Uks_Panel, uks+' ' + reserv + ' ' + ke, '1');
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' ' + reserv + ' ' + ke, '1');
     index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
     //Кнопка 27
-    PhotoInputCreate(index, 946, 954, Uks_Panel, floor_scales + ' ' + ke, '1');
+    if obj_select_form.Report.Rtype = 'MM' then
+    begin
+    PhotoInputCreate(index, u, u1, Uks_Panel, floor_scales + ' ' + ke, '1');
     index := index + 1;
+    end;
 
     //Панель для прочего
     Other_Panel:= TPanel.Create(obj_MM);
     Other_Panel.Parent := ScrollBox1;
     Other_Panel.Name := 'BtnBlock_other';
     Other_Panel.Caption := '';
-    Other_Panel.Top := 985+560*(n-1);
+    Other_Panel.Top := Uks_Panel.Height + Cash_Panel.Height *(n-1);
     Other_Panel.Left := 0;
     Other_Panel.Height := (3 + Report.tsdcount*2 + Report.apcount*3 + Report.mpcount*3)*36+15 ;
     Other_Panel.Width := 810;
@@ -348,13 +483,15 @@ begin
     begin
       for properti := 1 to 3 do
       begin
+
         if obj_select_form.Report.photos[item, 1] <> '' then // Если первое значение не пустое, значит есть данные о фото
           if obj_select_form.Report.photos[item, 3] = '' then // Если признак КЕ пустой значит кладем фото в корневую папку
-            RenameFile(obj_select_form.Report.photos[item, 2], MainDir + '\' + obj_select_form.Report.photos[item, 1] + '.jpg')
+            CopyFile(PChar(obj_select_form.Report.photos[item, 2]), PChar(MainDir + '\' + obj_select_form.Report.photos[item, 1] + '.jpg'), false)
           else // Если признак КЕ не пустой значит кладем фото в папку КЕ
-            RenameFile(obj_select_form.Report.photos[item, 2], MainDir + '\' + ke+ '\'  + obj_select_form.Report.photos[item, 1] + '.jpg');
+            CopyFile(PChar(obj_select_form.Report.photos[item, 2]), PChar(MainDir + '\' + ke+ '\'  + obj_select_form.Report.photos[item, 1] + '.jpg'), false)
       end;
     end;
+    ShowMessage('Отчет успешно сформирован');
   end
   else
    ShowMessage('Ошибка: папка не создана. Папка уже существует или нет доступа к файловой системе.');

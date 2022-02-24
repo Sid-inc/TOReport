@@ -343,15 +343,15 @@ begin
   case obj_type of
     1:
       begin
+        Report.Rtype := 'MM'; // Записываем тип отчета в глобальный объект
         obj_MM.Show;
         obj_sel_form.Hide;
-        Report.Rtype := 'MM'; // Записываем тип отчета в глобальный объект
       end;
     2:
       begin
+        Report.Rtype := 'MK'; // Записываем тип отчета в глобальный объект
         obj_MM.Show;
         obj_sel_form.Hide;
-        Report.Rtype := 'MK'; // Записываем тип отчета в глобальный объект
       end;
     3:
       begin
