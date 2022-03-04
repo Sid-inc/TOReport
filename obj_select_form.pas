@@ -104,7 +104,7 @@ var
   obj_type: integer;
   Report: TReport;
 
-  cash, inside, insidemk, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
+  cash, inside, insidemk, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview, allviewloc,
     check, checkmk, nut, wifi, egais, bpmark, rout, allviewb, allviewf, allviewm,
     swith, pcdir, pcdirmk, pcserv, pcservmk, printconnect, a4prt, testpage, hub, hubtd, allitemsmark,
     ap, mp, tsd, view, mark, chklst, install, plan, prt, uks, ke, pc, ibp, pinpad, scan, hand, scales,
@@ -179,7 +179,7 @@ begin
   ibpmark := 'Маркировка БП';
   sksmount := 'Монтаж СКС';
   allviewbuyer := 'Общий вид (покупатель)';
-  allviewitems := 'Общий вид Оборудование';
+  allviewitems := 'Общий вид оборудование';
   allview := 'Общий вид';
   inside := 'Внутри';
   check := 'Чек';
@@ -199,6 +199,7 @@ begin
   allviewb := 'Общий вид сзади';
   allviewf := 'Общий вид спереди';
   allviewm := 'Общий вид центр';
+  allviewloc := 'Общий вид расположение';
   swith := 'Переключатель';
   pcdir := 'ПК Директора';
   pcserv := 'ПК Сервер';

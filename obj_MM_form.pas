@@ -179,7 +179,7 @@ begin
     Uks_Panel.Left := 0;
     if obj_select_form.Report.Rtype = 'MM' then
     begin
-    Uks_Panel.Height := 985;
+    Uks_Panel.Height := 1021;
     end
     else
     Uks_Panel.Height := 913;
@@ -263,6 +263,11 @@ begin
     u1 := u1 + 36;
     //Кнопка 10
     PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allviewm, '');
+    index := index + 1;
+    u:= u +36;
+    u1 := u1 + 36;
+
+    PhotoInputCreate(index, u, u1, Uks_Panel, uks+' '+allviewloc, '');
     index := index + 1;
     u:= u +36;
     u1 := u1 + 36;

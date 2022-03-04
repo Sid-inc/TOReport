@@ -105,7 +105,7 @@ var
   Report: TReport;
 
   cash, inside, insidemk, kkt, ibpmark, sksmount, allviewbuyer, allviewitems, allview,
-    check, chekmk, nut, wifi, egais, bpmark, rout, allviewb, allviewf, allviewm,
+    check, checkmk, nut, wifi, egais, bpmark, rout, allviewb, allviewf, allviewm,
     swith, pcdir, pcdirmk, pcserv, pcservmk, printconnect, a4prt, testpage, hub, hubtd, allitemsmark,
     ap, mp, tsd, view, mark, chklst, install, plan, prt, uks, ke, pc, ibp, pinpad, scan, hand, scales,
     floor_scales, mon19, a4scan, master, reserv: string;
@@ -179,7 +179,7 @@ begin
   ibpmark := 'Маркировка БП';
   sksmount := 'Монтаж СКС';
   allviewbuyer := 'Общий вид (покупатель)';
-  allviewitems := 'Общий вид Оборудование';
+  allviewitems := 'Общий вид оборудование';
   allview := 'Общий вид';
   inside := 'Внутри';
   check := 'Чек';
@@ -188,7 +188,7 @@ begin
   //Для МК
   allitemsmark := 'Маркировка оборудования';
   insidemk := 'Обслуженная';
-  chekmk := 'Фото Чека';
+  checkmk := 'Фото Чека';
   //УКС для ММ
   uks := 'УКС';
   nut := 'Служба NUT';
@@ -343,15 +343,15 @@ begin
   case obj_type of
     1:
       begin
+        Report.Rtype := 'MM'; // Записываем тип отчета в глобальный объект
         obj_MM.Show;
         obj_sel_form.Hide;
-        Report.Rtype := 'ММ'; // Записываем тип отчета в глобальный объект
       end;
     2:
       begin
+        Report.Rtype := 'MK'; // Записываем тип отчета в глобальный объект
         obj_MM.Show;
         obj_sel_form.Hide;
-        Report.Rtype := 'МК'; // Записываем тип отчета в глобальный объект
       end;
     3:
       begin
